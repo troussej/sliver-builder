@@ -1,1 +1,1 @@
-web: ts-node packages/server/dist/server.js
+web: node packages/server/dist/server.js

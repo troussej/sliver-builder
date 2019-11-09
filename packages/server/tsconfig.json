@@ -3,6 +3,7 @@
         "sourceMap": true,
         "target": "es2017",
         "esModuleInterop": true,
+        "module": "commonjs",
         "outDir": "./dist",
         "baseUrl": "./src",
         "alwaysStrict": true,
