@@ -6,11 +6,15 @@ export class LogProvider {
 
     public static getLogger(): winston.Logger {
         const options: winston.LoggerOptions = {
+            format: winston.format.combine(
+                winston.format.colorize(),
+                winston.format.simple()
+            ),
             transports: [
                 new winston.transports.Console({
                     level: process.env.NODE_ENV === "production" ? "error" : "debug"
-                }),
-                new winston.transports.File({ filename: "debug.log", level: "debug" })
+                })
+                // new winston.transports.File({ filename: "debug.log", level: "debug" })
             ]
         };
 

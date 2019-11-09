@@ -8,7 +8,8 @@
         "lint": "lerna run lint",
         "postinstall": "npm run bootstrap && npm run build-ts",
         "test": "lerna run test",
-        "start": "node packages/server/server.js"
+        "start": "node packages/server/dist/server.js",
+        "dev": "lerna run dev"
     },
     "devDependencies": {
         "lerna": "^3.18.4"
