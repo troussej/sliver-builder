@@ -1,0 +1,21 @@
+{
+    "name": "sliver-builder-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "author": "Joel TROUSSET",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "mongodb": "^3.3.3",
+        "mongoose": "^5.7.9",
+        "node-cache": "^5.0.1",
+        "nodemon": "^1.19.4",
+        "scryfall-sdk": "^1.5.1"
+    }
+}
