@@ -1,16 +1,17 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "target": "es6",
-        "noImplicitAny": true,
-        "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "dist",
-        "baseUrl": "./src"
+        "target": "es2017",
+        "esModuleInterop": true,
+        "outDir": "./dist",
+        "baseUrl": "./src",
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
     },
     "include": [
-        "src/**/*"
+        "src/**/*.ts"
     ]
 }

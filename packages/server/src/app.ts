@@ -3,6 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 // import errorMiddleware from './middleware/error.middleware';
 
+
 import path from "path";
 import mongoose from "mongoose";
 
@@ -26,7 +27,7 @@ export class App {
         this.initializeErrorHandling();
 
         this.app.use(
-            express.static(path.join(__dirname, "../front/dist"), { maxAge: 31557600000 })
+            express.static(path.join(__dirname, "../../front/dist"), { maxAge: 31557600000 })
         );
     }
 
@@ -42,7 +43,7 @@ export class App {
 
     private initializeMiddlewares() {
         this.app.use(bodyParser.json());
-        //   this.app.use(cookieParser());
+
     }
 
     private initializeErrorHandling() {

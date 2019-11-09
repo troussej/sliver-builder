@@ -1,13 +1,13 @@
 import * as express from 'express';
 import Controller from 'api/controller.interface';
-const router = express.Router()
+
 
 
 
 const Scryfall = require('../../services/scryfall');
 
 export class CardController implements Controller {
-    public path = '/posts';
+    public path = '/cards';
     public router = express.Router();
 
     constructor() {

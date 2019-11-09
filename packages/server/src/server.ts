@@ -1,6 +1,7 @@
-import 'dotenv/config';
+
 import { App } from './app';
-import { CardController } from './api/card/card.controller';
+import { ApiController } from './api/api.controller';
+
 // import AuthenticationController from './authentication/authentication.controller';
 // import PostController from './post/post.controller';
 // import ReportController from './report/report.controller';
@@ -11,7 +12,7 @@ import { CardController } from './api/card/card.controller';
 
 const app = new App(
     [
-        new CardController(),
+        new ApiController(),
         // new AuthenticationController(),
         // new UserController(),
         // new ReportController(),
