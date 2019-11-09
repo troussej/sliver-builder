@@ -11,7 +11,7 @@ import bluebird from "bluebird";
 
 import { MONGODB_URI } from "./util/secrets";
 import Controller from "./api/controller.interface";
-
+import cors from 'cors';
 
 export class App {
     public app: express.Application;
@@ -42,7 +42,22 @@ export class App {
     }
 
     private initializeMiddlewares() {
-        this.app.use(bodyParser.json());
+
+        var originsWhitelist = [
+            'http://localhost:4200',      //this is my front-end url for development
+            'http://localhost:3000',
+        ];
+        var corsOptions = {
+            origin: function (origin: any, callback: any) {
+                var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+                callback(null, isWhitelisted);
+            },
+            credentials: true
+        }
+
+        this.app
+            .use(bodyParser.json())
+            .use(cors(corsOptions));
 
     }
 
