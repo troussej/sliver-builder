@@ -9,7 +9,7 @@ if (fs.existsSync(envFile)) {
     logger.debug("Using .env file to supply config environment variables");
     dotenv.config({ path: envFile });
 } else {
-    logger.error("Missing .env file at " + envFile);
+    // logger.w    ("Missing .env file at " + envFile);
 
 }
 export const ENVIRONMENT = process.env.NODE_ENV;

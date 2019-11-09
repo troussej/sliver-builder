@@ -5,7 +5,7 @@
         "esModuleInterop": true,
         "module": "commonjs",
         "outDir": "./dist",
-        "baseUrl": "./src",
+        // "baseUrl": "./src",
         "alwaysStrict": true,
         "noImplicitAny": true,
         "experimentalDecorators": true,

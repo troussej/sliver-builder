@@ -1,14 +1,16 @@
 import * as express from 'express';
-import Controller from 'api/controller.interface';
+import Controller from '../controller.interface';
+import Scryfall from '../../services/scryfall';
 
 
 
 
-const Scryfall = require('../../services/scryfall');
+
 
 export class CardController implements Controller {
     public path = '/cards';
     public router = express.Router();
+    private scryfall = new Scryfall();
 
     constructor() {
         this.initializeRoutes();
@@ -17,7 +19,7 @@ export class CardController implements Controller {
     private initializeRoutes() {
 
         this.router.
-            get("/cards", function (req, res) {
+            get("/cards", function (req: any, res: any) {
                 // db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
                 //     if (err) {
                 //         handleError(res, err.message, "Failed to get contacts.");
@@ -26,10 +28,10 @@ export class CardController implements Controller {
                 //     }
                 // });
 
-                Scryfall.CardById().then((data: any) => {
+                this.scryfall.CardById().then((data: any) => {
                     res.status(200).json(data);
                 })
-            });
+            }.bind(this));
     }
 }
 
