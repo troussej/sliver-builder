@@ -11,13 +11,13 @@ import { CardsService } from 'src/app/services/cards.service';
 })
 export class MainComponent implements OnInit {
 
-  private cards$: Observable<Card[]>;
+  private commanders$: Observable<Card[]>;
 
   constructor(private cardService: CardsService) { }
 
   ngOnInit() {
 
-    this.cards$ = this.cardService.getCards();
+    this.commanders$ = this.cardService.getCommanders();
   }
 
 }

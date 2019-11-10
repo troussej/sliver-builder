@@ -17,10 +17,10 @@
                 <strong>EDH Sliver Deck Builder</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">
+        <span class="navbar-toggler-icon">
 
-                </span>
-            </button>
+        </span>
+      </button>
         </div>
     </div>
 </header>
@@ -28,16 +28,8 @@
 <main role="main">
 
 
-    <app-card-carousel [cards]="cards$ |async"></app-card-carousel>
+    <app-card-selector [cards]="commanders$ |async"></app-card-selector>
 
-    <div class="album py-5 bg-light">
-        <div class="container">
-
-            <div class="row">
-                terst
-            </div>
-        </div>
-    </div>
 
 </main>
 

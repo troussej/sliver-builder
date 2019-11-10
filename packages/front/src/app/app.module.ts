@@ -1,28 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CommanderComponent } from './decks/commander/commander.component';
 import { MainComponent } from './pages/main/main.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { CardCarouselComponent } from './cards/card-carousel/card-carousel.component';
+import { CardSelectorComponent } from './cards/card-selector/card-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CommanderComponent,
     MainComponent,
-    CardCarouselComponent
+    CardSelectorComponent
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
 
   ],
   providers: [],
