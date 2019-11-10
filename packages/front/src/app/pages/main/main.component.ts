@@ -11,7 +11,7 @@ import { CardsService } from 'src/app/services/cards.service';
 })
 export class MainComponent implements OnInit {
 
-  private commanders$: Observable<Card[]>;
+  public commanders$: Observable<Card[]>;
 
   constructor(private cardService: CardsService) { }
 

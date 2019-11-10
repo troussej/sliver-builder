@@ -9,7 +9,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "dev": "ng serve --configuration dev",
-        "postinstall": "ng build --output-path dist"
+        "build-ts": "ng build --configuration production --output-path dist"
     },
     "private": true,
     "dependencies": {
