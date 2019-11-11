@@ -1,6 +1,6 @@
 /* tslint:disable:variable-name */
 
-export interface ImageUris {
+export class ImageUris {
     small: string;
     normal: string;
     large: string;
@@ -9,7 +9,7 @@ export interface ImageUris {
     border_crop: string;
 }
 
-export interface Legalities {
+export class Legalities {
     standard: string;
     frontier: string;
     modern: string;
@@ -23,14 +23,14 @@ export interface Legalities {
     future: string;
 }
 
-export interface RelatedUris {
+export class RelatedUris {
     gatherer: string;
     tcgplayer_decks: string;
     edhrec: string;
     mtgtop8: string;
 }
 
-export interface PurchaseUris {
+export class PurchaseUris {
     amazon: string;
     ebay: string;
     tcgplayer: string;
@@ -41,7 +41,7 @@ export interface PurchaseUris {
     coolstuffinc: string;
 }
 
-export interface CardFace {
+export class CardFace {
     object: string;
     name: string;
     mana_cost: string;
@@ -108,16 +108,16 @@ export class Card {
     card_faces?: CardFace[];
 }
 
-export interface CardsResponse {
+export class CardsResponse {
     total_cards: number;
     has_more: boolean;
     cards: Card[];
 }
 
-export interface CardResponse {
+export class CardResponse {
     card: Card;
 }
 
-export interface CardProps {
+export class CardProps {
     card: Card;
 }

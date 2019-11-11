@@ -7,7 +7,7 @@
     </div>
     <div class="row">
 
-        <div class="col" *ngIf="cards">
+        <div class="col-8" *ngIf="cards">
 
             <div class="card">
                 <div class="card-header">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-check" *ngFor="let card of cards">
-                        <input class="form-check-input" [(ngModel)]="selectedCard" type="radio" name="exampleRadios" [id]="card.id" [value]="card">
+                        <input class="form-check-input" [(ngModel)]="selectedCard" type="radio" name="exampleRadios" [id]="card.id" [value]="card" (change)="handleChange($event)">
                         <label class="form-check-label" [for]="card.id">
                             {{card.name}}
                         </label>
@@ -25,14 +25,11 @@
 
 
         </div>
-        <div class="col">
+        <div class="col-4">
 
-            <div class="card" *ngIf="selectedCard">
+            <div class="" *ngIf="selectedCard">
                 <img class="card-img-top" [src]="selectedCard.image_uris.normal" [alt]="selectedCard.name">
-                <div class="card-body">
-                    <h5 class="card-title"> {{selectedCard.name}}</h5>
 
-                </div>
             </div>
         </div>
     </div>
