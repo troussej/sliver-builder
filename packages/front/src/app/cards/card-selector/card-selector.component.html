@@ -1,10 +1,5 @@
 <div class="container">
 
-
-
-    <div class="row">
-        <h3 class="mb-4"></h3>
-    </div>
     <div class="row">
 
         <div class="col-8" *ngIf="cards">
@@ -15,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-check" *ngFor="let card of cards">
-                        <input class="form-check-input" [(ngModel)]="selectedCard" type="radio" name="exampleRadios" [id]="card.id" [value]="card" (change)="handleChange($event)">
+                        <input class="form-check-input" [(ngModel)]="selectedCard" type="radio" name="exampleRadios" [id]="card.id" [value]="card" (change)="handleChange">
                         <label class="form-check-label" [for]="card.id">
                             {{card.name}}
                         </label>

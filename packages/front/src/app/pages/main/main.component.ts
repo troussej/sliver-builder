@@ -23,7 +23,9 @@ export class MainComponent implements OnInit {
   }
 
   selectCommander($event) {
-    console.log('selectCommander', $event);
+    // console.log('selectCommander', $event);
+
+    this.deck.setCommander($event);
   }
 
 }

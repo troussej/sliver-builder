@@ -27,8 +27,21 @@
 
 <main role="main">
 
+    <div class="container">
 
-    <app-card-selector [cards]="commanders$ |async" (selected)="selectCommander($event)"></app-card-selector>
+        <div class="row mt-3">
+            <div class="col-8">
+
+                <app-card-selector [cards]="commanders$ |async" (selected)="selectCommander($event)">
+                </app-card-selector>
+            </div>
+            <div class="col-4">
+                <app-deck-list [deck]="deck"></app-deck-list>
+            </div>
+
+        </div>
+    </div>
+
 
 
 </main>

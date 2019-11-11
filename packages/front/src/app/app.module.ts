@@ -9,12 +9,14 @@ import { MainComponent } from './pages/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { CardSelectorComponent } from './cards/card-selector/card-selector.component';
+import { DeckListComponent } from './decks/deck-list/deck-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    CardSelectorComponent
+    CardSelectorComponent,
+    DeckListComponent
 
   ],
   imports: [
