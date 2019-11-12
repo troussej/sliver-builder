@@ -3,7 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 // import errorMiddleware from './middleware/error.middleware';
 
-
+import proxy  from 'express-http-proxy';
 import path from "path";
 import mongoose from "mongoose";
 
@@ -57,7 +57,9 @@ export class App {
 
         this.app
             .use(bodyParser.json())
-            .use(cors(corsOptions));
+            .use(cors(corsOptions))
+
+            .use('/proxy/scryfall', proxy('https://api.scryfall.com'));
 
     }
 
