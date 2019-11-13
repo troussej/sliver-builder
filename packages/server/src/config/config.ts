@@ -137,7 +137,7 @@ export default {
             "Selesnya Signet",
             "Simic Signet"
         ],
-        talisman: [
+        talismans: [
             "Talisman of Conviction",
             "Talisman of Creativity",
             "Talisman of Curiosity",
@@ -149,7 +149,7 @@ export default {
             "Talisman of Resilience",
             "Talisman of Unity"
         ],
-        freeSuspend: [[
+        suspend: [[
             "Ancestral Vision",
             "Crashing Footfalls",
             "Hypergenesis",

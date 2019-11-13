@@ -22,7 +22,11 @@ export class DeckController implements Controller {
             "commanders",
             true,
             "radio"
-
+        ));
+        this.rawConfig.push(new CardPackage(
+            "suspend",
+            false,
+            "checkbox"
         ));
         this.rawConfig.push(new CardPackage(
             "rocks",
@@ -34,6 +38,14 @@ export class DeckController implements Controller {
             false,
             "checkbox"
         ));
+        this.rawConfig.push(new CardPackage(
+            "talismans",
+            false,
+            "checkbox"
+        ));
+
+
+
     }
 
     private initializeRoutes() {
@@ -47,7 +59,7 @@ export class DeckController implements Controller {
                     Promise
                         .all(calls)
                         .then((scryRes: any[]) => {
-                            logger.debug('deck controller res %j', scryRes);
+                            logger.silly('deck controller res %j', scryRes);
 
                             _.forEach(this.rawConfig, (line: CardPackage, index: number) => {
                                 line.options = scryRes[index];

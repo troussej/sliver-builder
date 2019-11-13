@@ -21,7 +21,7 @@ export class App {
 
 
 
-        this.connectToTheDatabase();
+        // this.connectToTheDatabase();
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
         this.initializeErrorHandling();

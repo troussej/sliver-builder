@@ -25,7 +25,6 @@
     "author": "Joel TROUSSET",
     "license": "ISC",
     "dependencies": {
-        "sliver-builder-common": "1.0.0",
         "@types/cors": "^2.8.6",
         "@types/express-http-proxy": "^1.5.12",
         "bluebird": "^3.7.1",
@@ -39,6 +38,7 @@
         "mongoose": "^5.7.9",
         "node-cache": "^5.0.1",
         "scryfall-sdk-jtro": "^1.5.1",
+        "sliver-builder-common": "1.0.0",
         "winston": "^3.2.1"
     },
     "devDependencies": {
