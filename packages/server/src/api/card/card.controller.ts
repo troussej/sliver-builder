@@ -19,23 +19,16 @@ export class CardController implements Controller {
     private initializeRoutes() {
 
         this.router
-            .get("/commanders",
+            .get("/collection/:name",
                 function (req: any, res: any) {
 
-                    this.scryfall.getCommanders().then((data: any) => {
+                    this.scryfall.getCollection(req.params.name).then((data: any) => {
                         res.status(200).json(data);
                     })
-                }.bind(this)
-            )
-
-            .get("/ramp",
-                function (req: any, res: any) {
-                    this.scryfall.getRamp().then((data: any) => {
-                        res.status(200).json(data);
-                    })
-
                 }.bind(this)
             );
+
+
     }
 }
 

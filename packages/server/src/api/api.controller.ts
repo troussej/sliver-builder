@@ -8,7 +8,8 @@ export class ApiController implements Controller {
 
     constructor() {
         let card = new CardController();
-        this.router.use('/api', card.router);
+        this.router.use(card.path, card.router);
+
 
     }
 }

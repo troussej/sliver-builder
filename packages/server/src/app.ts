@@ -3,7 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 // import errorMiddleware from './middleware/error.middleware';
 
-import proxy  from 'express-http-proxy';
+import proxy from 'express-http-proxy';
 import path from "path";
 import mongoose from "mongoose";
 
@@ -69,7 +69,7 @@ export class App {
 
     private initializeControllers(controllers: Controller[]) {
         controllers.forEach((controller) => {
-            this.app.use('/', controller.router);
+            this.app.use(controller.path, controller.router);
         });
     }
 
