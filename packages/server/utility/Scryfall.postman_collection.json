@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "786329d3-87fd-4cc0-8297-ebcad2541926",
+		"name": "Scryfall",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/cards/collection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scryfall}}/cards/collection",
+					"host": [
+						"{{scryfall}}"
+					],
+					"path": [
+						"cards",
+						"collection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/cards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scryfall}}/cards/collection",
+					"host": [
+						"{{scryfall}}"
+					],
+					"path": [
+						"cards",
+						"collection"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

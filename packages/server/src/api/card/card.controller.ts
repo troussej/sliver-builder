@@ -18,20 +18,24 @@ export class CardController implements Controller {
 
     private initializeRoutes() {
 
-        this.router.
-            get("/commanders", function (req: any, res: any) {
-                // db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-                //     if (err) {
-                //         handleError(res, err.message, "Failed to get contacts.");
-                //     } else {
-                //         res.status(200).json(docs);
-                //     }
-                // });
+        this.router
+            .get("/commanders",
+                function (req: any, res: any) {
 
-                this.scryfall.getCommanders().then((data: any) => {
-                    res.status(200).json(data);
-                })
-            }.bind(this));
+                    this.scryfall.getCommanders().then((data: any) => {
+                        res.status(200).json(data);
+                    })
+                }.bind(this)
+            )
+
+            .get("/ramp",
+                function (req: any, res: any) {
+                    this.scryfall.getRamp().then((data: any) => {
+                        res.status(200).json(data);
+                    })
+
+                }.bind(this)
+            );
     }
 }
 
