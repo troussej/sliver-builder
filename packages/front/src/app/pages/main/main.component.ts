@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Card } from 'src/app/cards/card';
+
 import { CardsService } from 'src/app/services/cards.service';
-import { Deck } from 'src/app/decks/deck';
+import { CardPackage } from 'sliver-builder-common';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,20 +13,35 @@ import { Deck } from 'src/app/decks/deck';
 })
 export class MainComponent implements OnInit {
 
-  public deck: Deck;
-  public commanders$: Observable<Card[]>;
+
+
+  public form: FormGroup;
+  public formConfig: CardPackage[];
 
   constructor(private cardService: CardsService) { }
 
   ngOnInit() {
-    this.deck = new Deck();
-    this.commanders$ = this.cardService.getCommanders();
+
+
+    this.cardService.getDeckConfig().subscribe((conf: CardPackage[]) => {
+      this.formConfig = conf;
+      this.form = this.buildForm(conf);
+    })
+
+
   }
 
-  selectCommander($event) {
-    // console.log('selectCommander', $event);
+  private buildForm(conf: CardPackage[]): FormGroup {
+    let group: any = {};
 
-    this.deck.setCommander($event);
+    conf.forEach((question: CardPackage) => {
+      group[question.name] = question.required ? new FormControl('', Validators.required)
+        : new FormControl('');
+    });
+
+    return new FormGroup(group);
   }
+
+
 
 }

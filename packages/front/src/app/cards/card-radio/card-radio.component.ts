@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { Card } from '../card';
+import { Card } from 'scryfall-sdk';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-card-selector',
-  templateUrl: './card-selector.component.html',
-  styleUrls: ['./card-selector.component.css']
+  selector: 'app-card-radio',
+  templateUrl: './card-radio.component.html',
+  styleUrls: ['./card-radio.component.css']
 })
-export class CardSelectorComponent implements OnInit {
+export class CardRadioComponent implements OnInit {
 
   @Input() cards: Card[];
   selectedCard: Card;

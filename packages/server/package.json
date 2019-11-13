@@ -25,6 +25,7 @@
     "author": "Joel TROUSSET",
     "license": "ISC",
     "dependencies": {
+        "sliver-builder-common": "1.0.0",
         "@types/cors": "^2.8.6",
         "@types/express-http-proxy": "^1.5.12",
         "bluebird": "^3.7.1",

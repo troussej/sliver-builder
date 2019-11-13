@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Card } from '../cards/card';
+
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { CardPackage } from 'sliver-builder-common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardsService {
 
-  private url = environment.apiRoot + '/api/commanders';
+
 
   constructor(private http: HttpClient) { }
 
 
-  public getCommanders(): Observable<Card[]> {
 
-    return this.http.get<Card[]>(this.url);
+  public getDeckConfig(): Observable<CardPackage[]> {
+    return this.http.get<CardPackage[]>(environment.apiRoot + '/api/packages');
+  }
 
+  public getDeck(options: CardPackage[]): any {
+    return null;
   }
 
 

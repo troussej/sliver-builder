@@ -11,6 +11,8 @@ export default class Scryfall {
         if (!_.isNil(conf[collectionName])) {
             let ids: Scry.CardIdentifier[] = _.map(conf[collectionName], (name: string) => Scry.CardIdentifier.byName(name));
 
+
+
             return Scry.Cards.collection(...ids).waitForAll();
 
         } else {
