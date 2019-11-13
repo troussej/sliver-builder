@@ -7,6 +7,7 @@ export class LogProvider {
     public static getLogger(): winston.Logger {
         const options: winston.LoggerOptions = {
             format: winston.format.combine(
+                winston.format.splat(),
                 winston.format.colorize(),
                 winston.format.simple()
             ),

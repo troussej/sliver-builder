@@ -1,1 +1,1 @@
-export * from './models/DeckConfig';
+export * from './models/CardPackage';

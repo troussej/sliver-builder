@@ -11,14 +11,10 @@ import { CardPackage } from 'sliver-builder-common';
 })
 export class CardsService {
 
-
-
   constructor(private http: HttpClient) { }
 
-
-
   public getDeckConfig(): Observable<CardPackage[]> {
-    return this.http.get<CardPackage[]>(environment.apiRoot + '/api/packages');
+    return this.http.get<CardPackage[]>(environment.apiRoot + '/api/deckconfig');
   }
 
   public getDeck(options: CardPackage[]): any {
