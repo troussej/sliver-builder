@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Card } from 'scryfall-sdk';
 import * as _ from 'lodash';
+import { CardPackage } from 'sliver-builder-common';
 
 @Component({
   selector: 'app-card-radio',
@@ -9,6 +10,7 @@ import * as _ from 'lodash';
 })
 export class CardRadioComponent implements OnInit {
 
+  @Input() config: CardPackage;
   @Input() cards: Card[];
   selectedCard: Card;
   @Output() selected: EventEmitter<any> = new EventEmitter();

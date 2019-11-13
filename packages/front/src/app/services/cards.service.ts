@@ -14,7 +14,7 @@ export class CardsService {
   constructor(private http: HttpClient) { }
 
   public getDeckConfig(): Observable<CardPackage[]> {
-    return this.http.get<CardPackage[]>(environment.apiRoot + '/api/deckconfig');
+    return this.http.get<CardPackage[]>(environment.apiRoot + '/api/decks/config');
   }
 
   public getDeck(options: CardPackage[]): any {

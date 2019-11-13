@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Deck } from '../deck';
+//import { Deck } from '../deck';
 
 @Component({
   selector: 'app-deck-list',
@@ -8,7 +8,7 @@ import { Deck } from '../deck';
 })
 export class DeckListComponent implements OnInit {
 
-  @Input() deck: Deck;
+  // @Input() deck: Deck;
 
   constructor() { }
 
