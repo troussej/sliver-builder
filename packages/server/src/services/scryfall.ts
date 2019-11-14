@@ -24,16 +24,28 @@ export default class Scryfall {
 
                 logger.debug('calling scryfall for %s', key);
 
-                return Scry.Cards.collection(...ids).waitForAll().then(data => {
-                    this.cache.set(key, data);
-                    return data;
-                });
+                return Scry.Cards.collection(...ids).waitForAll()
+                    .then(data => {
+                        logger.silly('scryfall result for %j : %j', ids, data);
+                        this.cache.set(key, data);
+                        return data;
+                    })
+                    .catch((err: any) => {
+                        logger.error(err);
+                        return [];
+                    })
+
+
 
             } else {
+                logger.warn('no collection configuration for %s, returning empty', key);
+
                 this.cache.set(key, []);
                 return Promise.resolve([]);
             }
         } else {
+            logger.silly('returning cached value for %s', key);
+
             return Promise.resolve(res);
         }
 

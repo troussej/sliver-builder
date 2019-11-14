@@ -149,7 +149,7 @@ export default {
             "Talisman of Resilience",
             "Talisman of Unity"
         ],
-        suspend: [[
+        suspend: [
             "Ancestral Vision",
             "Crashing Footfalls",
             "Hypergenesis",
@@ -158,7 +158,7 @@ export default {
             "Mox Tantalite",
             "Restore Balance",
             "Wheel of Fate"
-        ]]
+        ]
     }
 }
 
