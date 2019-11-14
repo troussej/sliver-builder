@@ -2,7 +2,8 @@ import { Card } from "scryfall-sdk";
 
 export enum PackageSelectionState {
   Auto,
-  Manual
+  Manual,
+  None
 }
 
 export class CardPackage {

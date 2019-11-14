@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { CardsService } from 'src/app/services/cards.service';
 import { CardPackage } from 'sliver-builder-common';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class MainComponent implements OnInit {
             cards: new FormGroup(
               cardlist
             ),
-            mode: new FormControl('')
+            mode: new FormControl(pckg.mode)
           }
           )
           break;
@@ -66,6 +67,8 @@ export class MainComponent implements OnInit {
 
     return new FormGroup(group);
   }
+
+
 
   onSubmit() {
 

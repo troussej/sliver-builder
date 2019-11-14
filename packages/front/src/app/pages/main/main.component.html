@@ -29,9 +29,9 @@
 <main role="main">
 
   <div class="container" *ngIf="form">
-    <!-- <pre>
+    <pre>
      {{form.value|json:2}}
-   </pre> -->
+   </pre>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
@@ -39,17 +39,26 @@
         <div class="col-10">
 
           <ngb-accordion #acc="ngbAccordion" [closeOthers]="false" [activeIds]="formConfig[0].name">
-            <ng-template ngFor let-package [ngForOf]=" formConfig">
+            <ng-template ngFor let-package [ngForOf]="formConfig">
               <ngb-panel [id]="package.name" [formGroup]="form.controls[package.name]">
                 <ng-template ngbPanelHeader let-opened="opened">
                   <div class="d-flex align-items-center justify-content-between">
-                    <h5 class="m-0">{{'package.'+package.name |translate}}</h5>
+                    <h5 class="m-0" [class.text-secondary]="2==form.controls[package.name].controls['mode'].value">
+                      {{'package.'+package.name |translate}}
+                    </h5>
 
-                    <button ngbPanelToggle class="btn btn-sm btn-outline-primary ml-2"
-                      *ngIf="package.name!='commanders'">
-                      {{opened?'manual':'auto'|translate}}
-                    </button>
-                    <input type="text" formControlName="mode" [value]="opened" />
+                    <div *ngIf="package.name!='commanders'" class="btn-group btn-group-toggle" ngbRadioGroup
+                      name="radioBasic" formControlName="mode">
+                      <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="0" (click)="acc.collapse(package.name)"> Auto
+                      </label>
+                      <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="1" (click)="acc.expand(package.name)"> Manual
+                      </label>
+                      <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="2" (click)="acc.collapse(package.name)"> None
+                      </label>
+                    </div>
 
                   </div>
                 </ng-template>
