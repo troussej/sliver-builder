@@ -10,8 +10,7 @@
             <div class="row" *ngIf="colIndexes">
               <div class="col" *ngFor="let i of colIndexes">
                 <div class="form-check" *ngFor="let card of config.options | slice:i*colSize:(i+1)*colSize ">
-                  <input class="form-check-input" type="checkbox" [name]="config.name" [formControlName]="config.name"
-                    [id]="card.id" [value]="card">
+                  <input class="form-check-input" type="checkbox" formControlName="cards" [id]="card.id" [value]="card">
                   <label class="form-check-label" [for]="card.id">
                     {{card.name}}
                   </label>

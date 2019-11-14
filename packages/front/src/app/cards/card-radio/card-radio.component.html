@@ -11,8 +11,7 @@
               <div class="col-8">
 
                 <div class="form-check" *ngFor="let card of config.options">
-                  <input class="form-check-input" type="radio" [name]="config.name" [formControlName]="config.name"
-                    [id]="card.id" [value]="card">
+                  <input class="form-check-input" type="radio" formControlName="cards" [id]="card.id" [value]="card">
                   <label class="form-check-label" [for]="card.id">
                     {{card.name}}
                   </label>
@@ -22,9 +21,9 @@
 
               <div class="col-4">
 
-                <div class="" *ngIf="form.controls[config.name].value">
-                  <img class="card-img-top" [src]="form.controls[config.name].value.image_uris.normal"
-                    [alt]="form.controls[config.name].value.name">
+                <div class="" *ngIf="form.controls.cards.value">
+                  <img class="card-img-top" [src]="form.controls.cards.value.image_uris.normal"
+                    [alt]="form.controls.cards.value.name">
 
                 </div>
               </div>

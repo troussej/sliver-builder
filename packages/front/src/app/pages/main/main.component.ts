@@ -34,9 +34,17 @@ export class MainComponent implements OnInit {
   private buildForm(conf: CardPackage[]): FormGroup {
     let group: any = {};
 
-    conf.forEach((question: CardPackage) => {
-      group[question.name] = question.required ? new FormControl('', Validators.required)
-        : new FormControl('');
+    conf.forEach((pckg: CardPackage) => {
+
+
+      group[pckg.name] = new FormGroup(
+        {
+          cards: pckg.required ? new FormControl('', Validators.required)
+            : new FormControl(''),
+          mode: new FormControl('')
+
+        }
+      )
     });
 
     return new FormGroup(group);

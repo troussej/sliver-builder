@@ -37,10 +37,10 @@
 
           <div [ngSwitch]="package.type">
 
-            <app-card-radio *ngSwitchCase="'radio'" [form]="form" [config]="package">
+            <app-card-radio *ngSwitchCase="'radio'" [form]="form.controls[package.name]" [config]="package">
             </app-card-radio>
 
-            <app-cards-checklist *ngSwitchCase="'checkbox'" [form]="form" [config]="package">
+            <app-cards-checklist *ngSwitchCase="'checkbox'" [form]="form.controls[package.name]" [config]="package">
             </app-cards-checklist>
           </div>
         </form>
