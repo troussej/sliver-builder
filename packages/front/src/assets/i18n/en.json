@@ -5,5 +5,7 @@
     "rocks": "Colorless mana rocks",
     "signets": "Signets",
     "talismans": "Talismans"
-  }
+  },
+  "auto": "Auto",
+  "manual": "Manual"
 }

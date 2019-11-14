@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Card } from 'scryfall-sdk';
 import { CardPackage } from 'sliver-builder-common';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cards-checklist',
@@ -23,5 +23,6 @@ export class CardsChecklistComponent implements OnInit {
     this.nbCols = Math.ceil(this.config.options.length / this.colSize);
     this.colIndexes = Array.from(Array(this.nbCols).keys());
   }
+
 
 }
