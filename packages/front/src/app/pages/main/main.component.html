@@ -34,8 +34,15 @@
             <div class="col-8">
 
                 <form [formGroup]="form">
-                    <app-card-radio [form]="form" [config]="package">
-                    </app-card-radio>
+
+                    <div [ngSwitch]="package.type">
+
+                        <app-card-radio *ngSwitchCase="'radio'" [form]="form" [config]="package">
+                        </app-card-radio>
+
+                        <app-cards-checklist *ngSwitchCase="'checkbox'" [form]="form" [config]="package">
+                        </app-cards-checklist>
+                    </div>
                 </form>
 
             </div>
