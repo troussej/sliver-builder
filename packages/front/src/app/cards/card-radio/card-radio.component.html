@@ -4,7 +4,7 @@
         <div class="col-8" *ngIf="cards">
             <div class="card">
                 <div class="card-header">
-                    {{config.name}}
+                    {{'package.'+config.name |translate}}
                 </div>
                 <div class="card-body">
                     <div class="form-check" *ngFor="let card of cards">
