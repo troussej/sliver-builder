@@ -1,5 +1,5 @@
 import * as  Scry from "scryfall-sdk-jtro";
-import * as _ from 'lodash';
+import _ from 'lodash';
 import config from '../config/config';
 import NodeCache from 'node-cache';
 import { logger } from "../util/logger";
@@ -25,6 +25,7 @@ export default class Scryfall {
                 logger.debug('calling scryfall for %s', key);
 
                 return Scry.Cards.collection(...ids).waitForAll()
+                    .then(data => _.sortBy(data, 'name'))
                     .then(data => {
                         logger.silly('scryfall result for %j : %j', ids, data);
                         this.cache.set(key, data);
