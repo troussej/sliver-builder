@@ -30,27 +30,15 @@
 
   <div class="container" *ngIf="form">
 
-    <div class="row mt-3" *ngFor="let package of formConfig">
-      <div class="col-10">
+    <form [formGroup]="form">
+      <div class="row mt-3" *ngFor="let package of formConfig">
+        <div class="col-10">
 
-        <form [formGroup]="form">
+          <app-package-switch [form]="form.controls[package.name]" [config]="package"></app-package-switch>
 
-          <div [ngSwitch]="package.type">
-
-            <app-card-radio *ngSwitchCase="'radio'" [form]="form.controls[package.name]" [config]="package">
-            </app-card-radio>
-
-            <app-cards-checklist *ngSwitchCase="'checkbox'" [form]="form.controls[package.name]" [config]="package">
-            </app-cards-checklist>
-          </div>
-        </form>
-
+        </div>
       </div>
-      <!-- <div class="col-4">
-                <app-deck-list [deck]="deck"></app-deck-list>
-            </div> -->
-
-    </div>
+    </form>
   </div>
 
 

@@ -15,6 +15,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DeckListComponent } from './decks/deck-list/deck-list.component';
 import { CardRadioComponent } from './cards/card-radio/card-radio.component';
 import { CardsChecklistComponent } from './cards/cards-checklist/cards-checklist.component';
+import { PackageSwitchComponent } from './cards/package-switch/package-switch.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -27,7 +28,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MainComponent,
     DeckListComponent,
     CardRadioComponent,
-    CardsChecklistComponent
+    CardsChecklistComponent,
+    PackageSwitchComponent
 
   ],
   imports: [

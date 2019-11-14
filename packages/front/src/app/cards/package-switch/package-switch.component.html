@@ -1,0 +1,8 @@
+<div [ngSwitch]="config.type">
+
+  <app-card-radio *ngSwitchCase="'radio'" [form]="form" [config]="config">
+  </app-card-radio>
+
+  <app-cards-checklist *ngSwitchCase="'checkbox'" [form]="form" [config]="config">
+  </app-cards-checklist>
+</div>

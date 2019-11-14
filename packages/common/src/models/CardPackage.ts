@@ -1,20 +1,19 @@
 import { Card } from "scryfall-sdk";
 
 export enum PackageSelectionState {
-    All,
-    None,
-    Some
+  Auto,
+  Manual
 }
 
 export class CardPackage {
 
-    constructor(
-        public name: string,
-        public required: boolean,
-        public type: string, //radio,checkbox
-        public options: Card[] = [],
-        public state: PackageSelectionState = PackageSelectionState.None, //all/none/some     
-        public cards: Card[] = []
-    ) { }
+  constructor(
+    public name: string,
+    public required: boolean,
+    public type: string, //radio,checkbox
+    public options: Card[] = [],
+    public mode: PackageSelectionState = PackageSelectionState.Auto
+
+  ) { }
 
 }
