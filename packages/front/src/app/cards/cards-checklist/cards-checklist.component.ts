@@ -10,14 +10,18 @@ import { FormGroup } from '@angular/forms';
 })
 export class CardsChecklistComponent implements OnInit {
 
-
+  @Input() colSize: number = 5;
   @Input() form: FormGroup;
-  @Input() config: CardPackage;
 
+  @Input() config: CardPackage;
+  nbCols: number;
+  colIndexes: number[];
 
   constructor() { }
 
   ngOnInit() {
+    this.nbCols = Math.ceil(this.config.options.length / this.colSize);
+    this.colIndexes = Array.from(Array(this.nbCols).keys());
   }
 
 }

@@ -1,67 +1,67 @@
 <header>
-    <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                    <h4 class="text-white">About</h4>
-                    <p class="text-muted">WIP</p>
-                </div>
-
-            </div>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">WIP</p>
         </div>
-    </div>
-    <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
 
-                <strong>EDH Sliver Deck Builder</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
-                aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">
-
-                </span>
-            </button>
-        </div>
+      </div>
     </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+
+        <strong>EDH Sliver Deck Builder</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+        aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+
+        </span>
+      </button>
+    </div>
+  </div>
 </header>
 
 <main role="main">
 
-    <div class="container" *ngIf="form">
+  <div class="container" *ngIf="form">
 
-        <div class="row mt-3" *ngFor="let package of formConfig">
-            <div class="col-8">
+    <div class="row mt-3" *ngFor="let package of formConfig">
+      <div class="col-8">
 
-                <form [formGroup]="form">
+        <form [formGroup]="form">
 
-                    <div [ngSwitch]="package.type">
+          <div [ngSwitch]="package.type">
 
-                        <app-card-radio *ngSwitchCase="'radio'" [form]="form" [config]="package">
-                        </app-card-radio>
+            <app-card-radio *ngSwitchCase="'radio'" [form]="form" [config]="package">
+            </app-card-radio>
 
-                        <app-cards-checklist *ngSwitchCase="'checkbox'" [form]="form" [config]="package">
-                        </app-cards-checklist>
-                    </div>
-                </form>
+            <app-cards-checklist *ngSwitchCase="'checkbox'" [form]="form" [config]="package">
+            </app-cards-checklist>
+          </div>
+        </form>
 
-            </div>
-            <!-- <div class="col-4">
+      </div>
+      <!-- <div class="col-4">
                 <app-deck-list [deck]="deck"></app-deck-list>
             </div> -->
 
-        </div>
     </div>
+  </div>
 
 
 
 </main>
 
 <footer class="text-muted">
-    <div class="container">
-        <p class="float-right">
-            <a href="#">Back to top</a>
-        </p>
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
 
-    </div>
+  </div>
 </footer>

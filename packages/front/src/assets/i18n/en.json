@@ -1,9 +1,9 @@
 {
-    "package": {
-        "commanders": "Select your commander",
-        "suspend": "Free spells with suspend",
-        "rocks": "Colorless mana rocks",
-        "signets": "Signets",
-        "talismans": "Talismans"
-    }
+  "package": {
+    "commanders": "Select your commander",
+    "suspend": "Free spells with suspend",
+    "rocks": "Colorless mana rocks",
+    "signets": "Signets",
+    "talismans": "Talismans"
+  }
 }
