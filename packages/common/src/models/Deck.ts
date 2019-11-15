@@ -18,3 +18,20 @@ export class CardPackage {
   ) { }
 
 }
+
+export class Deck {
+  constructor(
+    public cards: Card[]
+  ) { };
+}
+
+export class CardInDeck {
+
+  constructor(
+    public card: Card,
+    public quantity: number,
+    public priority: number
+
+  ) { };
+
+}

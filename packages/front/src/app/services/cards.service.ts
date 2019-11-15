@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { CardPackage } from 'sliver-builder-common';
+import { CardPackage, Deck } from 'sliver-builder-common';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,8 @@ export class CardsService {
     return this.http.get<CardPackage[]>(environment.apiRoot + '/api/decks/config');
   }
 
-  public getDeck(options: CardPackage[]): any {
-    return null;
+  public postDeck(options: CardPackage[]): any {
+    return this.http.post<Deck>(environment.apiRoot + '/api/decks', options);
   }
 
 

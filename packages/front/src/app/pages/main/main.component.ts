@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import _ from 'lodash';
 import { CardsService } from 'src/app/services/cards.service';
-import { CardPackage } from 'sliver-builder-common';
+import { CardPackage, PackageSelectionState } from 'sliver-builder-common';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NGXLogger } from 'ngx-logger';
+import { Card } from 'sliver-builder-common/node_modules/scryfall-sdk';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class MainComponent implements OnInit {
   public form: FormGroup;
   public formConfig: CardPackage[];
 
-  constructor(private cardService: CardsService) { }
+  constructor(private cardService: CardsService, private logger: NGXLogger) { }
 
   ngOnInit() {
 
@@ -71,7 +73,30 @@ export class MainComponent implements OnInit {
 
 
   onSubmit() {
+    //transform the form to send to the backend
+    let formVal: any = this.form.value;
+    this.logger.debug('onSubmit  formVal=', formVal);
 
+    let payload: CardPackage[] = _.map(formVal, (value, key) => {
+      switch (key) {
+        case 'commanders':
+          return new CardPackage(key, true, null, [value.cards], PackageSelectionState.Manual);
+          break;
+        default:
+          return new CardPackage(key, true, null, this.findCards(key, value.cards), value.mode);
+      }
+    });
+    this.logger.debug('payload:', payload);
+  }
+  findCards(packageName: string, cards: any): Card[] {
+    let pkg: CardPackage = _.find(this.formConfig, ['name', packageName]);
+    this.logger.debug('pkg', pkg);
+    return _.chain(cards)
+      .pickBy((val) => val)
+      .tap(val => this.logger.debug('pickBy', val))
+      .map((val, cardName) => _.find(pkg.options, ['name', cardName]))
+      .tap(val => this.logger.debug('map', val))
+      .value();
   }
 
 }

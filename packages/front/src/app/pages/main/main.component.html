@@ -29,9 +29,9 @@
 <main role="main">
 
   <div class="container" *ngIf="form">
-    <pre>
+    <!-- <pre>
      {{form.value|json:2}}
-   </pre>
+   </pre> -->
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
