@@ -1,9 +1,8 @@
-import { Deck, CardPackage, PackageSelectionState, DeckColors, ColorStats } from 'sliver-builder-common';
+import { Deck, CardPackage, PackageSelectionState, DeckColors, CardInDeck } from 'sliver-builder-common';
 import { logger } from '../util/logger';
 import _ from 'lodash';
-import { CardInDeck } from '../../../common/src/models/Deck';
-export class DeckBuilder {
 
+export class DeckBuilder {
 
   public build(config: CardPackage[]): Deck {
     logger.silly('build %j', config);
