@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --inspect ./src/server.ts",
+    "dev": "nodemon ./src/server.ts",
     "start": "npm run serve",
     "build": "npm run build-sass && npm run build-ts && npm run lint && npm run copy-static-assets",
     "serve": "node dist/server.js",
