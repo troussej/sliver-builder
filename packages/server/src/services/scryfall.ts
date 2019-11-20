@@ -18,9 +18,9 @@ export default class Scryfall {
     let res = this.cache.get(key);
 
     if (_.isNil(res)) {
-      let conf: any = config.cards;
+      let conf: any = config.packages;
       if (!_.isNil(conf[collectionName])) {
-        let ids: Scry.CardIdentifier[] = _.map(conf[collectionName], (name: string) => Scry.CardIdentifier.byName(name));
+        let ids: Scry.CardIdentifier[] = _.map(conf[collectionName].cards, (name: string) => Scry.CardIdentifier.byName(name));
 
         logger.debug('calling scryfall for %s', key);
 

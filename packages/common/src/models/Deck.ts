@@ -21,6 +21,7 @@ export class CardPackage {
 }
 
 export class Deck {
+  public stats: DeckStats;
   constructor(
     public cards: CardInDeck[]
   ) { };
@@ -45,7 +46,7 @@ export class ColorStats {
   public G: number = 0;
 }
 
-export class DeckColors {
+export class DeckStats {
 
   spells: ColorStats = new ColorStats();
   mana: ColorStats = new ColorStats();

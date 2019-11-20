@@ -26,6 +26,11 @@ export class DeckController implements Controller {
       "radio"
     ));
     this.rawConfig.push(new CardPackage(
+      "test",
+      false,
+      "checkbox"
+    ));
+    this.rawConfig.push(new CardPackage(
       "suspend",
       false,
       "checkbox"
