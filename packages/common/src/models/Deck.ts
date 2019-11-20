@@ -1,4 +1,5 @@
-import { Card } from "scryfall-sdk";
+import { Card, Color } from "scryfall-sdk";
+
 
 export enum PackageSelectionState {
   Auto,
@@ -21,7 +22,7 @@ export class CardPackage {
 
 export class Deck {
   constructor(
-    public cards: Card[]
+    public cards: CardInDeck[]
   ) { };
 }
 
@@ -34,4 +35,18 @@ export class CardInDeck {
 
   ) { };
 
+}
+
+export class ColorStats {
+  public W: number = 0;
+  public U: number = 0;
+  public B: number = 0;
+  public R: number = 0;
+  public G: number = 0;
+}
+
+export class DeckColors {
+
+  spells: ColorStats = new ColorStats();
+  mana: ColorStats = new ColorStats();
 }

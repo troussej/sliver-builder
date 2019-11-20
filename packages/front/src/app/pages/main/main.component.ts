@@ -87,6 +87,10 @@ export class MainComponent implements OnInit {
       }
     });
     this.logger.debug('payload:', payload);
+
+    this.cardService.postDeck(payload).subscribe((data) => {
+      console.log('resp deckbuild', data);
+    })
   }
   findCards(packageName: string, cards: any): Card[] {
     let pkg: CardPackage = _.find(this.formConfig, ['name', packageName]);

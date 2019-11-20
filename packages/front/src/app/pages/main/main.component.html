@@ -43,7 +43,7 @@
               <ngb-panel [id]="package.name" [formGroup]="form.controls[package.name]">
                 <ng-template ngbPanelHeader let-opened="opened">
                   <div class="d-flex align-items-center justify-content-between">
-                    <h5 class="m-0" [class.text-secondary]="2==form.controls[package.name].controls['mode'].value">
+                    <h5 class="m-0">
                       {{'package.'+package.name |translate}}
                     </h5>
 
