@@ -55,7 +55,10 @@ export class DeckBuilder {
 
       //mana sources
       let oracleText = cardInDeck.card.oracle_text;
+
       this.calcManaSources(oracleText, res.mana);
+
+
 
 
       return res;
@@ -78,20 +81,24 @@ export class DeckBuilder {
   }
 
   public calcManaSources(oracleText: string, res: ColorStats) {
-    let matches: string[] = this.matchOracleText(oracleText);
-    logger.silly('ORACLE_LINE matches %s %j', oracleText, matches);
-    if (!_.isNil(matches) && matches.length >= 4) {
-      let rightHandSide = matches[3];
-      matches = this.matchAddMana(rightHandSide);
+    let lines = oracleText.split('\n')
+    lines.forEach(line => {
+      let matches: string[] = this.matchOracleText(line);
 
-      if (!_.isNil(matches) && matches.length > 0) {
-        res.W += this.countOccurence(rightHandSide, this.COUNT_W);
-        res.U += this.countOccurence(rightHandSide, this.COUNT_U);
-        res.B += this.countOccurence(rightHandSide, this.COUNT_B);
-        res.R += this.countOccurence(rightHandSide, this.COUNT_R);
-        res.G += this.countOccurence(rightHandSide, this.COUNT_G);
+      if (!_.isNil(matches) && matches.length >= 4) {
+        let rightHandSide = matches[3];
+        matches = this.matchAddMana(rightHandSide);
+
+        if (!_.isNil(matches) && matches.length > 0) {
+          res.W += this.countOccurence(rightHandSide, this.COUNT_W);
+          res.U += this.countOccurence(rightHandSide, this.COUNT_U);
+          res.B += this.countOccurence(rightHandSide, this.COUNT_B);
+          res.R += this.countOccurence(rightHandSide, this.COUNT_R);
+          res.G += this.countOccurence(rightHandSide, this.COUNT_G);
+        }
       }
-    }
+    });
+
   }
 
   countOccurence(val: string, regex: RegExp): number {
