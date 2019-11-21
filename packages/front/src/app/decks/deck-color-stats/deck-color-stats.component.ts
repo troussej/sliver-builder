@@ -3,8 +3,8 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend, Color, MultiDataSet } from 'ng2-charts';
 import { ChartType, RadialChartOptions, ChartDataSets, ChartOptions } from 'chart.js';
 import { NGXLogger } from 'ngx-logger';
-import { ColorStats } from 'sliver-builder-common';
-import { DeckStats } from '../../../../../common/src/models/Deck';
+import { ColorStats, DeckStats } from 'sliver-builder-common';
+
 
 @Component({
   selector: 'app-deck-color-stats',
@@ -46,7 +46,7 @@ export class DeckColorStatsComponent implements OnInit, OnChanges {
   public chartLegend = false;
   public chartPlugins = [];
 
-  constructor(private logger: NGXLogger) {
+  constructor (private logger: NGXLogger) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }

@@ -9,7 +9,7 @@ export enum PackageSelectionState {
 
 export class CardPackage {
 
-  constructor(
+  constructor (
     public name: string,
     public required: boolean,
     public type: string, //radio,checkbox
@@ -22,14 +22,14 @@ export class CardPackage {
 
 export class Deck {
   public stats: DeckStats;
-  constructor(
+  constructor (
     public cards: CardInDeck[]
   ) { };
 }
 
 export class CardInDeck {
 
-  constructor(
+  constructor (
     public card: Card,
     public quantity: number,
     public priority: number
@@ -50,4 +50,5 @@ export class DeckStats {
 
   spells: ColorStats = new ColorStats();
   mana: ColorStats = new ColorStats();
+  curve: { [rank: number]: number } = {};
 }

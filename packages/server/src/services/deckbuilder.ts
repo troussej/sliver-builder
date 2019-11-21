@@ -1,9 +1,8 @@
-import { Deck, CardPackage, PackageSelectionState, CardInDeck, DeckStats } from 'sliver-builder-common';
-import { logger } from '../util/logger';
-import appConfig from '../config/config';
 import _ from 'lodash';
-import { Card } from 'scryfall-sdk-jtro';
-import { ColorStats } from '../../../common/src/models/Deck';
+import { CardInDeck, CardPackage, ColorStats, Deck, DeckStats, PackageSelectionState } from 'sliver-builder-common';
+import appConfig from '../config/config';
+import { logger } from '../util/logger';
+
 
 
 
@@ -26,7 +25,7 @@ export class DeckBuilder {
 
     this.addManualCards(deck, config);
 
-    this.computeColors(deck);
+    this.computeStats(deck);
 
     this.sortDeck(deck);
     return deck;
@@ -35,11 +34,7 @@ export class DeckBuilder {
     deck.cards = _.sortBy(deck.cards, "priority");
   }
 
-  computeColors(deck: Deck): void {
-
-
-
-
+  computeStats(deck: Deck): void {
     let stats = _.reduce(deck.cards, function (res: DeckStats, cardInDeck: CardInDeck) {
 
       let quantity = cardInDeck.quantity;
@@ -55,10 +50,12 @@ export class DeckBuilder {
 
       //mana sources
       let oracleText = cardInDeck.card.oracle_text;
-
       this.calcManaSources(oracleText, res.mana);
 
-
+      //mana curve
+      if (cardInDeck.card.type_line.indexOf('Land') <= 0) {
+        this.calcManaCurve(res.curve, cardInDeck.card.cmc);
+      }
 
 
       return res;
@@ -78,6 +75,13 @@ export class DeckBuilder {
     const res = text.match(this.ADD_MANA);
     logger.silly('ADD_MANA matches %s %j', text, res);
     return res;
+  }
+
+  public calcManaCurve(curve: { [key: number]: number }, cmc: number): void {
+    if (_.isNil(curve[cmc])) {
+      curve[cmc] = 0;
+    }
+    curve[cmc]++;
   }
 
   public calcManaSources(oracleText: string, res: ColorStats) {

@@ -19,6 +19,7 @@ import { CardRadioComponent } from './cards/card-radio/card-radio.component';
 import { CardsChecklistComponent } from './cards/cards-checklist/cards-checklist.component';
 import { PackageSwitchComponent } from './cards/package-switch/package-switch.component';
 import { DeckColorStatsComponent } from './decks/deck-color-stats/deck-color-stats.component';
+import { ManaCurveComponent } from './decks/mana-curve/mana-curve.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CardRadioComponent,
     CardsChecklistComponent,
     PackageSwitchComponent,
-    DeckColorStatsComponent
+    DeckColorStatsComponent,
+    ManaCurveComponent
 
   ],
   imports: [
