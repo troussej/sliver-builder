@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import _ from 'lodash';
 import { CardsService } from 'src/app/services/cards.service';
-import { CardPackage, PackageSelectionState, Deck } from 'sliver-builder-common';
+import { CardPackage, PackageSelectionState, Deck, DeckForm } from 'sliver-builder-common';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { NGXLogger } from 'ngx-logger';
 import { Card } from 'sliver-builder-common/node_modules/scryfall-sdk';
-
-
 
 @Component({
   selector: 'app-main',
@@ -17,13 +15,11 @@ import { Card } from 'sliver-builder-common/node_modules/scryfall-sdk';
 })
 export class MainComponent implements OnInit {
 
-
-
   public form: FormGroup;
   public formConfig: CardPackage[];
   public deck: Deck;
 
-  constructor(private cardService: CardsService, private logger: NGXLogger) { }
+  constructor (private cardService: CardsService, private logger: NGXLogger) { }
 
   ngOnInit() {
 
@@ -79,7 +75,16 @@ export class MainComponent implements OnInit {
     let formVal: any = this.form.value;
     this.logger.debug('onSubmit  formVal=', formVal);
 
-    let payload: CardPackage[] = _.map(formVal, (value, key) => {
+    let payload = this.buildPayload(formVal);
+
+    this.cardService.postDeck(payload).subscribe((data: Deck) => {
+      this.logger.debug('resp deckbuild', data);
+      this.deck = data;
+    })
+  }
+
+  private buildPayload(formVal: any) {
+    let packages: CardPackage[] = _.map(formVal, (value, key) => {
       switch (key) {
         case 'commanders':
           return new CardPackage(key, true, null, [value.cards], PackageSelectionState.Manual);
@@ -88,12 +93,9 @@ export class MainComponent implements OnInit {
           return new CardPackage(key, true, null, this.findCards(key, value.cards), value.mode);
       }
     });
-    this.logger.debug('payload:', payload);
-
-    this.cardService.postDeck(payload).subscribe((data: Deck) => {
-      this.logger.debug('resp deckbuild', data);
-      this.deck = data;
-    })
+    this.logger.debug('payload:', packages);
+    let payload = new DeckForm(null, packages);
+    return payload;
   }
 
   /**

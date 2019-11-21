@@ -52,3 +52,15 @@ export class DeckStats {
   mana: ColorStats = new ColorStats();
   curve: { [rank: number]: number } = {};
 }
+
+export class DeckOptions {
+
+  public lands: number = 0;
+  public ramp: number = 0;
+  public content: number = 0;
+
+}
+
+export class DeckForm {
+  constructor (public options: DeckOptions, public packages: CardPackage[]) { }
+}

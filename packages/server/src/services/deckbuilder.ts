@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { CardInDeck, CardPackage, ColorStats, Deck, DeckStats, PackageSelectionState } from 'sliver-builder-common';
 import appConfig from '../config/config';
 import { logger } from '../util/logger';
+import { DeckForm } from 'sliver-builder-common/src/models/Deck';
 
 
 
@@ -18,12 +19,12 @@ export class DeckBuilder {
   public COUNT_G = /\{G}/g;
   public COUNT_C = /\{C}/g;
 
-  public build(config: CardPackage[]): Deck {
-    logger.silly('build %j', config);
+  public build(form: DeckForm): Deck {
+    logger.silly('build %j', form);
 
     let deck: Deck = new Deck([]);
 
-    this.addManualCards(deck, config);
+    this.addManualCards(deck, form.packages);
 
     this.computeStats(deck);
 
