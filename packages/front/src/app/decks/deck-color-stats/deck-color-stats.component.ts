@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend, Color } from 'ng2-charts';
+import { Label, SingleDataSet, monkeyPatchChartJsTooltip, monkeyPatchChartJsLegend, Color, MultiDataSet } from 'ng2-charts';
 import { ChartType, RadialChartOptions, ChartDataSets, ChartOptions } from 'chart.js';
 import { NGXLogger } from 'ngx-logger';
 import { ColorStats } from 'sliver-builder-common';
+import { DeckStats } from '../../../../../common/src/models/Deck';
 
 @Component({
   selector: 'app-deck-color-stats',
@@ -12,7 +13,7 @@ import { ColorStats } from 'sliver-builder-common';
 })
 export class DeckColorStatsComponent implements OnInit, OnChanges {
 
-  @Input() stats: ColorStats;
+  @Input() stats: DeckStats;
   @Input() titleKey: String;
 
   // Pie
@@ -29,9 +30,18 @@ export class DeckColorStatsComponent implements OnInit, OnChanges {
         '#ce2424', // R
         '#259839', // G
       ]
+    },
+    {
+      backgroundColor: [
+        '#eeeeee', // W
+        '#4352bf', // U 
+        '#111111', // B
+        '#ce2424', // R
+        '#259839', // G
+      ]
     }
   ];
-  public chartData: SingleDataSet = [];
+  public chartData: MultiDataSet = [];
   public chartType: ChartType = 'pie';
   public chartLegend = false;
   public chartPlugins = [];
@@ -50,7 +60,7 @@ export class DeckColorStatsComponent implements OnInit, OnChanges {
   }
 
   private setupChart() {
-    this.chartData = Object.values(this.stats);
+    this.chartData = [Object.values(this.stats.spells), Object.values(this.stats.mana)];
   }
 
 }

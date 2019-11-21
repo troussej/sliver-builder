@@ -82,13 +82,16 @@
       </div>
     </form>
 
+    <div class="row mt-1">
+      <div class="col">
+        <h5>Deck statistics:</h5>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
-        <app-deck-color-stats [stats]="deck.stats.spells" titleKey="spells" *ngIf="deck"></app-deck-color-stats>
+        <app-deck-color-stats [stats]="deck.stats" titleKey="" *ngIf="deck"></app-deck-color-stats>
       </div>
-      <div class="col">
-        <app-deck-color-stats [stats]="deck.stats.mana" titleKey="mana" *ngIf="deck"></app-deck-color-stats>
-      </div>
+
     </div>
   </div>
 
