@@ -23,11 +23,11 @@ export class DeckColorStatsComponent implements OnInit, OnChanges {
   public chartColors: Color[] = [
     {
       backgroundColor: [
-        '#eeeeee',
-        '#4352bf',
-        '#111111',
-        '#ce2424',
-        '#259839',
+        '#eeeeee', // W
+        '#4352bf', // U 
+        '#111111', // B
+        '#ce2424', // R
+        '#259839', // G
       ]
     }
   ];
