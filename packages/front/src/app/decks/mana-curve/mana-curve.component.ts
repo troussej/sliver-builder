@@ -18,7 +18,13 @@ export class ManaCurveComponent implements OnInit, OnChanges {
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: {
+      xAxes: [{}], yAxes: [{
+        ticks: {
+          stepSize: 1
+        }
+      }]
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
