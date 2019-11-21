@@ -82,6 +82,11 @@
       </div>
     </form>
 
+    <div class="row">
+      <div class="col">
+        <app-deck-color-stats [stats]="deck.stats.spells" titleKey="spells" *ngIf="deck"></app-deck-color-stats>
+      </div>
+    </div>
   </div>
 
 

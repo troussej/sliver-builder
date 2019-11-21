@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -17,6 +18,7 @@ import { DeckListComponent } from './decks/deck-list/deck-list.component';
 import { CardRadioComponent } from './cards/card-radio/card-radio.component';
 import { CardsChecklistComponent } from './cards/cards-checklist/cards-checklist.component';
 import { PackageSwitchComponent } from './cards/package-switch/package-switch.component';
+import { DeckColorStatsComponent } from './decks/deck-color-stats/deck-color-stats.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -30,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeckListComponent,
     CardRadioComponent,
     CardsChecklistComponent,
-    PackageSwitchComponent
+    PackageSwitchComponent,
+    DeckColorStatsComponent
 
   ],
   imports: [
@@ -46,7 +49,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    LoggerModule.forRoot({ level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.OFF })
+    LoggerModule.forRoot({ level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.OFF }),
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

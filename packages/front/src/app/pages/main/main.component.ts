@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import _ from 'lodash';
 import { CardsService } from 'src/app/services/cards.service';
-import { CardPackage, PackageSelectionState } from 'sliver-builder-common';
+import { CardPackage, PackageSelectionState, Deck } from 'sliver-builder-common';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { NGXLogger } from 'ngx-logger';
 import { Card } from 'sliver-builder-common/node_modules/scryfall-sdk';
+
 
 
 @Component({
@@ -20,6 +21,7 @@ export class MainComponent implements OnInit {
 
   public form: FormGroup;
   public formConfig: CardPackage[];
+  public deck: Deck;
 
   constructor(private cardService: CardsService, private logger: NGXLogger) { }
 
@@ -88,11 +90,16 @@ export class MainComponent implements OnInit {
     });
     this.logger.debug('payload:', payload);
 
-    this.cardService.postDeck(payload).subscribe((data) => {
-      console.log('resp deckbuild', data);
+    this.cardService.postDeck(payload).subscribe((data: Deck) => {
+      this.logger.debug('resp deckbuild', data);
+      this.deck = data;
     })
   }
-  findCards(packageName: string, cards: any): Card[] {
+
+  /**
+   * Gets the card object from the package config
+   */
+  private findCards(packageName: string, cards: any): Card[] {
     let pkg: CardPackage = _.find(this.formConfig, ['name', packageName]);
     this.logger.debug('pkg', pkg);
     return _.chain(cards)
