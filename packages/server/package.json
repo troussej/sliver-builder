@@ -10,7 +10,8 @@
     "serve": "node dist/server.js",
     "watch-node": "nodemon dist/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "test": "jest --forceExit --coverage --verbose",
+    "test:cov": "jest --forceExit --coverage --verbose",
+    "test": "jest ",
     "watch-test": "npm run test -- --watchAll",
     "build-ts": "rm -rf dist/ && tsc",
     "watch-ts": "tsc -w",
@@ -39,6 +40,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.23",
     "@types/async": "^3.0.2",
     "@types/bluebird": "^3.5.27",
     "@types/dotenv": "^8.2.0",
@@ -48,7 +50,9 @@
     "@types/lodash": "^4.14.141",
     "@types/mongoose": "^5.5.18",
     "@types/winston": "^2.4.4",
+    "jest": "^24.9.0",
     "concurrently": "^4.1.2",
+    "ts-jest": "^24.1.0",
     "eslint": "^6.4.0",
     "nodemon": "^1.19.4",
     "ts-node": "^8.4.1",

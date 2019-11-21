@@ -3,17 +3,21 @@ import { logger } from '../util/logger';
 import appConfig from '../config/config';
 import _ from 'lodash';
 import { Card } from 'scryfall-sdk-jtro';
+import { ColorStats } from '../../../common/src/models/Deck';
 
-const ORACLE_LINE = /\(?(([^.]*):)?([^.]*).\)?/;
-const ADD_MANA = /([Aa]dd)(([^\{}]*(\{[CWUBRG]})+)+)\./
-const COUNT_W = /\{W}/g;
-const COUNT_U = /\{U}/g;
-const COUNT_B = /\{B}/g;
-const COUNT_R = /\{R}/g;
-const COUNT_G = /\{G}/g;
-const COUNT_C = /\{C}/g;
+
 
 export class DeckBuilder {
+
+  public ORACLE_LINE = /\(?(([^.]*):)?([^.]*).\)?/;
+  // public ADD_MANA = /([Aa]dd)(([^\{}]*(\{[CWUBRG]})+)+)/;
+  public ADD_MANA = /([Aa]dd)/;
+  public COUNT_W = /\{W}/g;
+  public COUNT_U = /\{U}/g;
+  public COUNT_B = /\{B}/g;
+  public COUNT_R = /\{R}/g;
+  public COUNT_G = /\{G}/g;
+  public COUNT_C = /\{C}/g;
 
   public build(config: CardPackage[]): Deck {
     logger.silly('build %j', config);
@@ -40,23 +44,54 @@ export class DeckBuilder {
 
       let quantity = cardInDeck.quantity;
 
+      //mana costs
       let cost = cardInDeck.card.mana_cost;
 
-      res.spells.W += this.countOccurence(cost, COUNT_W);
-      res.spells.U += this.countOccurence(cost, COUNT_U);
-      res.spells.B += this.countOccurence(cost, COUNT_B);
-      res.spells.R += this.countOccurence(cost, COUNT_R);
-      res.spells.G += this.countOccurence(cost, COUNT_G);
+      res.spells.W += this.countOccurence(cost, this.COUNT_W);
+      res.spells.U += this.countOccurence(cost, this.COUNT_U);
+      res.spells.B += this.countOccurence(cost, this.COUNT_B);
+      res.spells.R += this.countOccurence(cost, this.COUNT_R);
+      res.spells.G += this.countOccurence(cost, this.COUNT_G);
 
+      //mana sources
       let oracleText = cardInDeck.card.oracle_text;
+      this.calcManaSources(oracleText, res.mana);
 
-      //costs
 
       return res;
     }.bind(this),
       new DeckStats());
 
     deck.stats = stats;
+  }
+
+  public matchOracleText(text: string): string[] {
+    const res = text.match(this.ORACLE_LINE);
+    logger.silly('ORACLE_LINE matches %s %j', text, res);
+    return res;
+  }
+
+  public matchAddMana(text: string): string[] {
+    const res = text.match(this.ADD_MANA);
+    logger.silly('ADD_MANA matches %s %j', text, res);
+    return res;
+  }
+
+  public calcManaSources(oracleText: string, res: ColorStats) {
+    let matches: string[] = this.matchOracleText(oracleText);
+    logger.silly('ORACLE_LINE matches %s %j', oracleText, matches);
+    if (!_.isNil(matches) && matches.length >= 4) {
+      let rightHandSide = matches[3];
+      matches = this.matchAddMana(rightHandSide);
+
+      if (!_.isNil(matches) && matches.length > 0) {
+        res.W += this.countOccurence(rightHandSide, this.COUNT_W);
+        res.U += this.countOccurence(rightHandSide, this.COUNT_U);
+        res.B += this.countOccurence(rightHandSide, this.COUNT_B);
+        res.R += this.countOccurence(rightHandSide, this.COUNT_R);
+        res.G += this.countOccurence(rightHandSide, this.COUNT_G);
+      }
+    }
   }
 
   countOccurence(val: string, regex: RegExp): number {
