@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { CardInDeck, CardPackage, ColorStats, Deck, DeckStats, PackageSelectionState } from 'sliver-builder-common';
-import { config as appConfig } from '../config/config';
+import { config as appConfig, PackageConfig } from '../config/config';
 import { logger } from '../util/logger';
 import { DeckForm } from 'sliver-builder-common/src/models/Deck';
 
@@ -118,7 +118,10 @@ export class DeckBuilder {
       .tap(data => logger.debug('post filter %j', _.map(data, "name")))
       .each(pkg => {
         logger.debug('pkg : %j', pkg);
-        let priority = (appConfig as any).packages[pkg.name].priority;
+
+        let pckConfig: PackageConfig = _.find(appConfig.packages, ["name", pkg.name]);
+
+        let priority = pckConfig.priority;
         let cid: CardInDeck[] = _.map(pkg.options, card => new CardInDeck(card, 1, priority));
 
         logger.debug('cid : %j', cid);
