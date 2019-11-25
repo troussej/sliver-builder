@@ -12,15 +12,15 @@ export default class Scryfall {
     this.cache = new NodeCache();
   }
 
-  public getCollection(collectionName: string) {
+  public getCollection(collectionName: string, cards: string[]) {
 
     const key = `collection:${collectionName}`;
     let res = this.cache.get(key);
 
     if (_.isNil(res)) {
-      let conf: any = config.packages;
-      if (!_.isNil(conf[collectionName])) {
-        let ids: Scry.CardIdentifier[] = _.map(conf[collectionName].cards, (name: string) => Scry.CardIdentifier.byName(name));
+
+      if (!_.isNil(cards)) {
+        let ids: Scry.CardIdentifier[] = _.map(cards, (name: string) => Scry.CardIdentifier.byName(name));
 
         logger.debug('calling scryfall for %s', key);
 

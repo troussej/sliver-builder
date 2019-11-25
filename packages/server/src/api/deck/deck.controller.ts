@@ -14,14 +14,20 @@ export class DeckController implements Controller {
   private scryfall: Scryfall = new Scryfall();
   private deckbuilder: DeckBuilder = new DeckBuilder();
 
-  private rawConfig: CardPackage[];
-
   constructor () {
     this.initializeRoutes();
 
-    this.rawConfig = _.map(config.packages, (packageDef: PackageConfig, name: string) =>
+
+
+  }
+
+  private initFormConfig(): Promise<CardPackage[]> {
+
+    const activeConf: PackageConfig[] = _.filter(config.packages, "active");
+
+    const formConfig: CardPackage[] = _.map(activeConf, (packageDef: PackageConfig) =>
       new CardPackage(
-        name,
+        packageDef.name,
         true,
         packageDef.type,
         null,
@@ -29,6 +35,17 @@ export class DeckController implements Controller {
       )
     )
 
+    let calls = _.map(activeConf, (line: PackageConfig) => this.scryfall.getCollection(line.name, line.cards));
+
+    return Promise
+      .all(calls)
+      .then((scryRes: any[]) => {
+
+        _.forEach(formConfig, (line: CardPackage, index: number) => {
+          line.options = scryRes[index];
+        });
+        return formConfig;
+      });
   }
 
   private initializeRoutes() {
@@ -37,20 +54,20 @@ export class DeckController implements Controller {
       .get("/config",
         function (req: any, res: any) {
 
+
+
           let calls = _.map(this.rawConfig, (line: CardPackage) => this.scryfall.getCollection(line.name));
 
-          Promise
-            .all(calls)
-            .then((scryRes: any[]) => {
-              logger.silly('deck controller res %j', scryRes);
+          this.initFormConfig()
+            .then((formConfig: CardPackage[]) => {
+              logger.debug('after initFormConfig ');
+              logger.silly('deck controller res %j', formConfig);
 
-              _.forEach(this.rawConfig, (line: CardPackage, index: number) => {
-                line.options = scryRes[index];
-              });
 
-              res.status(200).json(this.rawConfig);
+
+              res.status(200).json(formConfig);
             })
-            .catch(err => {
+            .catch((err: any) => {
 
               logger.error(err);
               res.status(503).json(err);

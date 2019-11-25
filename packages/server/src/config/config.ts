@@ -1,6 +1,8 @@
 import { PackageSelectionState } from 'sliver-builder-common';
 
 export interface PackageConfig {
+  name: string,
+  active: boolean,
   priority: number,
   type: string,
   defaultMode: PackageSelectionState,
@@ -9,9 +11,11 @@ export interface PackageConfig {
 }
 
 
-const config: { packages: { [name: string]: PackageConfig } } = {
-  packages: {
-    commanders: {
+const config: { packages: PackageConfig[] } = {
+  packages: [
+    {
+      name: 'commanders',
+      active: true,
       priority: 0,
       type: 'radio',
       defaultMode: PackageSelectionState.Manual,
@@ -23,10 +27,12 @@ const config: { packages: { [name: string]: PackageConfig } } = {
         "The First Sliver"
       ]
     },
-    slivers: {
+    {
+      name: 'slivers',
+      active: false,
       priority: 2,
       type: 'checkbox',
-      defaultMode: PackageSelectionState.None,
+      defaultMode: PackageSelectionState.Auto,
       cards: [
         "Acidic Sliver",
         "Armor Sliver",
@@ -140,7 +146,9 @@ const config: { packages: { [name: string]: PackageConfig } } = {
 
       ]
     },
-    rocks: {
+    {
+      name: 'rocks',
+      active: true,
       priority: 9,
       type: 'checkbox',
       defaultMode: PackageSelectionState.Manual,
@@ -170,7 +178,9 @@ const config: { packages: { [name: string]: PackageConfig } } = {
     //   ]
     // },
 
-    signets: {
+    {
+      name: 'signets',
+      active: true,
       priority: 10,
       type: 'checkbox',
       defaultMode: PackageSelectionState.Auto,
@@ -187,7 +197,9 @@ const config: { packages: { [name: string]: PackageConfig } } = {
         "Simic Signet"
       ]
     },
-    talismans: {
+    {
+      name: 'talismans',
+      active: true,
       priority: 10,
       type: 'checkbox',
       defaultMode: PackageSelectionState.Auto,
@@ -204,7 +216,9 @@ const config: { packages: { [name: string]: PackageConfig } } = {
         "Talisman of Unity"
       ]
     },
-    suspend: {
+    {
+      name: 'suspend',
+      active: true,
       priority: 1,
       type: 'checkbox',
       defaultMode: PackageSelectionState.Auto,
@@ -245,7 +259,7 @@ const config: { packages: { [name: string]: PackageConfig } } = {
     // }
     // }
 
-  }
+  ]
 }
 
 
