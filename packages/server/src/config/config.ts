@@ -239,24 +239,24 @@ const config: { packages: PackageConfig[] } = {
     //   defaultMode: null,
     //   children:
     //   {
-    // 'dual': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'fetchland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
-    // 'shockland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
-    // 'tangoland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'bikeland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'fastland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'checkland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'canopyland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'filterland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'bounceland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'painland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'scryland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'shadowland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'storageland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'creatureland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'triland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
-    // 'gainland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None }
-    // }
+    { name: 'dual', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    { name: 'fetchland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    { name: 'shockland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'tangoland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'bikeland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'fastland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'checkland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'canopyland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'filterland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'bounceland', active: false, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'painland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'scryland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'shadowland', active: true, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'storageland', active: false, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'creatureland', active: false, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'triland', active: false, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // { name: 'gainland', active: false, priority: 20, type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // 
     // }
 
   ]

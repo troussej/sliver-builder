@@ -15,13 +15,20 @@ export class DeckController implements Controller {
   private deckbuilder: DeckBuilder = new DeckBuilder();
 
   constructor () {
-    this.initializeRoutes();
+    //pre fill the caches
+    this.initFormConfig().then(() => {
+      this.initializeRoutes();
+    }
+    )
+
 
 
 
   }
 
   private initFormConfig(): Promise<CardPackage[]> {
+
+    console.time('initFormConfig');
 
     const activeConf: PackageConfig[] = _.filter(config.packages, "active");
 
@@ -35,17 +42,37 @@ export class DeckController implements Controller {
       )
     )
 
-    let calls = _.map(activeConf, (line: PackageConfig) => this.scryfall.getCollection(line.name, line.cards));
+    let calls = _.map(activeConf, (line: PackageConfig) => {
 
-    return Promise
-      .all(calls)
-      .then((scryRes: any[]) => {
+      switch (line.scryType) {
+        case 'nickname':
+          return this.scryfall.searchByNickname(line.name)
+          break;
+        default:
+          return this.scryfall.getCollection(line.name, line.cards)
+      }
 
-        _.forEach(formConfig, (line: CardPackage, index: number) => {
-          line.options = scryRes[index];
-        });
-        return formConfig;
+
+
+    });
+    //chain the calls to reduce strain on scryfall
+    //even though it is supposed to be handled by the Scry module
+    return calls.reduce((promiseChain, currentTask) => {
+      return promiseChain.then(chainResults =>
+        currentTask.then(currentResult =>
+          [...chainResults, currentResult]
+        )
+      );
+    }, Promise.resolve([])).then(scryRes => {
+      // Do something with all results
+      _.forEach(formConfig, (line: CardPackage, index: number) => {
+        line.options = scryRes[index];
       });
+      console.timeEnd('initFormConfig');
+      return formConfig;
+    });
+
+
   }
 
   private initializeRoutes() {
