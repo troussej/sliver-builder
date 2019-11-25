@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-//import { Deck } from '../deck';
+import { Deck } from 'sliver-builder-common';
+
 
 @Component({
   selector: 'app-deck-list',
@@ -8,9 +9,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DeckListComponent implements OnInit {
 
-  // @Input() deck: Deck;
+  @Input() deck: Deck;
 
-  constructor() { }
+  constructor () { }
 
   ngOnInit() {
   }

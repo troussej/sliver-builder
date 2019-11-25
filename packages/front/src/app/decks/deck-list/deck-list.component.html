@@ -1,23 +1,24 @@
-<!-- <div class="container">
-    <div class="row">
-        <div class="col">
+<div class="container">
+  <div class="row">
+    <div class="col">
 
-            <div class="card" *ngIf="deck && deck.cards.length > 0">
+      <div class="card" *ngIf="deck && deck.cards.length > 0">
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" *ngFor="let cardInDeck of deck.cards" [ngbPopover]="popContent" placement="auto" triggers="mouseenter:mouseleave">
-                        {{cardInDeck.card.name}}
-                        <span class="badge badge-light badge-pill"> ({{cardInDeck.quantity}})</span>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let cardInDeck of deck.cards" [ngbPopover]="popContent" placement="auto"
+            triggers="mouseenter:mouseleave">
+            {{cardInDeck.card.name}}
+            <span class="badge badge-light badge-pill"> ({{cardInDeck.quantity}})</span>
 
-                        <ng-template #popContent>
+            <ng-template #popContent>
 
-                            <img class="decklist" src="{{cardInDeck.card.image_uris.normal}}" />
+              <!-- <img class="decklist" src="{{cardInDeck.card.image_uris.normal}}" /> -->
 
-                        </ng-template>
-                    </li>
-                </ul>
+            </ng-template>
+          </li>
+        </ul>
 
-            </div>
-        </div>
+      </div>
     </div>
-</div> -->
+  </div>
+</div>

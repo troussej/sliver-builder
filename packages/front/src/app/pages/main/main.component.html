@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
+  <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
     <div class="container d-flex justify-content-between">
       <a href="#" class="navbar-brand d-flex align-items-center">
 
@@ -27,43 +27,63 @@
 </header>
 
 <main role="main">
+  <div class="row">
+    <div class="col">
 
-  <div class="container" *ngIf="form">
-    <!-- <pre>
+      <div class="container" *ngIf="form">
+        <!-- <pre>
      {{form.value|json:2}}
    </pre> -->
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <div class="row mt-3">
-        <div class="col-10">
+          <div class="row mb-3">
+            <div class="col">
 
-          <app-accordion [form]="form" [deck]="deck" [formConfig]="formConfig"></app-accordion>
+              <app-accordion [form]="form" [deck]="deck" [formConfig]="formConfig"></app-accordion>
 
-        </div>
-      </div>
-      <div class="row mt-1">
-
-        <div class="col-1">
-          <button class="btn btn-secondary" type="submit" [disabled]="!form.valid">Submit</button>
-        </div>
-      </div>
-
-      <div class="row mt-1" *ngIf="deck">
-        <div class="col">
-          <div class="card">
-            <div class="card-header">
-              Deck statistics:
-            </div>
-            <div class="card-body">
-              <app-deck-color-stats [stats]="deck.stats" titleKey=""></app-deck-color-stats>
-
-              <app-mana-curve [stats]="deck.stats"></app-mana-curve>
             </div>
           </div>
-        </div>
+          <div class="row mb-3">
+
+            <div class="col">
+
+            </div>
+
+            <div class="col-2">
+              <button class="btn btn-secondary" type="submit" [disabled]="!form.valid">Submit</button>
+            </div>
+          </div>
+
+          <div class="row mb-3" *ngIf="deck">
+            <div class="col">
+              <div class="card">
+                <div class="card-header">
+                  Deck statistics:
+                </div>
+                <div class="card-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm">
+                        <app-deck-color-stats [stats]="deck.stats" titleKey=""></app-deck-color-stats>
+                      </div>
+                      <div class="col-sm">
+                        <app-mana-curve [stats]="deck.stats"></app-mana-curve>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <app-deck-list *ngIf="deck" [deck]="deck"></app-deck-list>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
+
   </div>
 
 
