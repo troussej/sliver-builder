@@ -17,10 +17,18 @@ export class CardsChecklistComponent implements OnInit {
   nbCols: number;
   colIndexes: number[];
 
-  constructor() { }
+  constructor () { }
 
   ngOnInit() {
-    this.nbCols = Math.ceil(this.config.options.length / this.colSize);
+    // depending on the options size, we can adopt different columns size
+    if (this.config.options.length <= 10) {
+      this.colSize = 5;
+      this.nbCols = Math.ceil(this.config.options.length / this.colSize);
+    } else {
+
+      this.nbCols = 4;// Math.ceil(this.config.options.length / this.colSize);
+      this.colSize = Math.ceil(this.config.options.length / this.nbCols);
+    }
     this.colIndexes = Array.from(Array(this.nbCols).keys());
   }
 

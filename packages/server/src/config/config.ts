@@ -29,7 +29,7 @@ const config: { packages: PackageConfig[] } = {
     },
     {
       name: 'slivers',
-      active: false,
+      active: true,
       priority: 2,
       type: 'checkbox',
       defaultMode: PackageSelectionState.Auto,
