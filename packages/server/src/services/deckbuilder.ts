@@ -3,6 +3,7 @@ import { CardInDeck, CardPackage, ColorStats, Deck, DeckStats, PackageSelectionS
 import { config as appConfig, PackageConfig } from '../config/config';
 import { logger } from '../util/logger';
 import { DeckForm } from 'sliver-builder-common/src/models/Deck';
+import { Card } from 'scryfall-sdk-jtro';
 
 
 
@@ -18,6 +19,7 @@ export class DeckBuilder {
   public COUNT_R = /\{R}/g;
   public COUNT_G = /\{G}/g;
   public COUNT_C = /\{C}/g;
+  public LAND = /\bLand\b/;
 
   public build(form: DeckForm): Deck {
     logger.silly('build %j', form);
@@ -54,7 +56,7 @@ export class DeckBuilder {
       this.calcManaSources(oracleText, res.mana);
 
       //mana curve
-      if (cardInDeck.card.type_line.indexOf('Land') <= 0) {
+      if (!this.isLand(cardInDeck.card)) {
         this.calcManaCurve(res.curve, cardInDeck.card.cmc);
       }
 
@@ -64,6 +66,10 @@ export class DeckBuilder {
       new DeckStats());
 
     deck.stats = stats;
+  }
+
+  public isLand(card: Card) {
+    return card.type_line.match(this.LAND)
   }
 
   public matchOracleText(text: string): string[] {
