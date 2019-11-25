@@ -1,46 +1,32 @@
-export default {
+import { PackageSelectionState } from 'sliver-builder-common';
+
+export interface PackageConfig {
+  priority: number,
+  type: string,
+  defaultMode: PackageSelectionState,
+  cards?: string[],
+  scryType?: string
+}
+
+
+const config: { packages: { [name: string]: PackageConfig } } = {
   packages: {
-    commanders:
-
-    {
-      priority: 0, cards:
-        [
-
-          "Sliver Hivelord",
-          "Sliver Legion",
-          "Sliver Overlord",
-          "Sliver Queen",
-          "The First Sliver"
-
-        ]
-    },
-    rocks: {
-      priority: 9,
+    commanders: {
+      priority: 0,
+      type: 'radio',
+      defaultMode: PackageSelectionState.Manual,
       cards: [
-        "sol ring", "mana crypt", "mana vault", "arcane signet", "commmander sphere",
-        "grim monolith", "chrome mox", "mox diamond"
-      ]
-    },
-    test: {
-      priority: 2,
-      cards: [
-        "Acidic Sliver",
-        "Armor Sliver",
-        "Barbed Sliver",
-        "Basal Sliver",
-        "Belligerent Sliver",
-        "Bladeback Sliver",
-        "Blade Sliver",
-        "Blur Sliver",
-        "Bonescythe Sliver",
-        "Bonesplitter Sliver",
-        "Brood Sliver",
-        "Cautery Sliver",
-        "Cleaving Sliver"
+        "Sliver Hivelord",
+        "Sliver Legion",
+        "Sliver Overlord",
+        "Sliver Queen",
+        "The First Sliver"
       ]
     },
     slivers: {
       priority: 2,
+      type: 'checkbox',
+      defaultMode: PackageSelectionState.None,
       cards: [
         "Acidic Sliver",
         "Armor Sliver",
@@ -154,8 +140,40 @@ export default {
 
       ]
     },
+    rocks: {
+      priority: 9,
+      type: 'checkbox',
+      defaultMode: PackageSelectionState.Manual,
+      cards: [
+        "sol ring", "mana crypt", "mana vault", "arcane signet", "commmander sphere",
+        "grim monolith", "chrome mox", "mox diamond"
+      ]
+    },
+    // test: {
+    //   priority: 2,
+    //   type: 'checkbox',
+    //   defaultMode: PackageSelectionState.Auto,
+    //   cards: [
+    //     "Acidic Sliver",
+    //     "Armor Sliver",
+    //     "Barbed Sliver",
+    //     "Basal Sliver",
+    //     "Belligerent Sliver",
+    //     "Bladeback Sliver",
+    //     "Blade Sliver",
+    //     "Blur Sliver",
+    //     "Bonescythe Sliver",
+    //     "Bonesplitter Sliver",
+    //     "Brood Sliver",
+    //     "Cautery Sliver",
+    //     "Cleaving Sliver"
+    //   ]
+    // },
+
     signets: {
       priority: 10,
+      type: 'checkbox',
+      defaultMode: PackageSelectionState.Auto,
       cards: [
         "Azorius Signet",
         "Boros Signet",
@@ -171,6 +189,8 @@ export default {
     },
     talismans: {
       priority: 10,
+      type: 'checkbox',
+      defaultMode: PackageSelectionState.Auto,
       cards: [
         "Talisman of Conviction",
         "Talisman of Creativity",
@@ -186,6 +206,8 @@ export default {
     },
     suspend: {
       priority: 1,
+      type: 'checkbox',
+      defaultMode: PackageSelectionState.Auto,
       cards: [
         "Ancestral Vision",
         "Crashing Footfalls",
@@ -196,8 +218,35 @@ export default {
         "Restore Balance",
         "Wheel of Fate"
       ]
-    }
+    },
+    // lands: {
+    //   priority: 20,
+    //   type: 'subset',
+    //   defaultMode: null,
+    //   children:
+    //   {
+    // 'dual': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'fetchland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // 'shockland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.Auto },
+    // 'tangoland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'bikeland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'fastland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'checkland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'canopyland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'filterland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'bounceland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'painland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'scryland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'shadowland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'storageland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'creatureland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'triland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None },
+    // 'gainland': { type: 'checkbox', scryType: 'nickname', defaultMode: PackageSelectionState.None }
+    // }
+    // }
+
   }
 }
 
 
+export { config };

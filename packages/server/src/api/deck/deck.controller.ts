@@ -6,6 +6,7 @@ import { CardPackage, Deck } from 'sliver-builder-common';
 import Scryfall from '../../services/scryfall';
 import { logger } from '../../util/logger';
 import { DeckBuilder } from '../../services/deckbuilder';
+import { config, PackageConfig } from '../../config/config';
 
 export class DeckController implements Controller {
   public path = '/decks';
@@ -15,43 +16,18 @@ export class DeckController implements Controller {
 
   private rawConfig: CardPackage[];
 
-  constructor() {
+  constructor () {
     this.initializeRoutes();
 
-    this.rawConfig = [];
-
-    this.rawConfig.push(new CardPackage(
-      "commanders",
-      true,
-      "radio"
-    ));
-    this.rawConfig.push(new CardPackage(
-      "test",
-      false,
-      "checkbox"
-    ));
-    this.rawConfig.push(new CardPackage(
-      "suspend",
-      false,
-      "checkbox"
-    ));
-    this.rawConfig.push(new CardPackage(
-      "rocks",
-      false,
-      "checkbox"
-    ));
-    this.rawConfig.push(new CardPackage(
-      "signets",
-      false,
-      "checkbox"
-    ));
-    this.rawConfig.push(new CardPackage(
-      "talismans",
-      false,
-      "checkbox"
-    ));
-
-
+    this.rawConfig = _.map(config.packages, (packageDef: PackageConfig, name: string) =>
+      new CardPackage(
+        name,
+        true,
+        packageDef.type,
+        null,
+        packageDef.defaultMode
+      )
+    )
 
   }
 

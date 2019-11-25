@@ -1,6 +1,6 @@
 import * as  Scry from "scryfall-sdk-jtro";
 import _ from 'lodash';
-import config from '../config/config';
+import { config } from '../config/config';
 import NodeCache from 'node-cache';
 import { logger } from "../util/logger";
 
@@ -8,7 +8,7 @@ import { logger } from "../util/logger";
 export default class Scryfall {
   private cache: NodeCache;
 
-  constructor() {
+  constructor () {
     this.cache = new NodeCache();
   }
 

@@ -21,6 +21,7 @@ import { PackageSwitchComponent } from './cards/package-switch/package-switch.co
 import { DeckColorStatsComponent } from './decks/deck-color-stats/deck-color-stats.component';
 import { ManaCurveComponent } from './decks/mana-curve/mana-curve.component';
 import { DeckOptionsComponent } from './decks/deck-options/deck-options.component';
+import { AccordionComponent } from './cards/accordion/accordion.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PackageSwitchComponent,
     DeckColorStatsComponent,
     ManaCurveComponent,
-    DeckOptionsComponent
+    DeckOptionsComponent,
+    AccordionComponent
 
   ],
   imports: [

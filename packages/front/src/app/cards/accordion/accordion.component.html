@@ -1,0 +1,31 @@
+<ngb-accordion #acc="ngbAccordion" [closeOthers]="false" [activeIds]="activeIds">
+  <ng-template ngFor let-package [ngForOf]="formConfig">
+    <ngb-panel [id]="package.name" [formGroup]="form.controls[package.name]">
+      <ng-template ngbPanelHeader let-opened="opened">
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="m-0">
+            {{'package.'+package.name |translate}}
+          </h6>
+
+          <div *ngIf="package.name!='commanders'" class="btn-group btn-group-sm btn-group-toggle" ngbRadioGroup
+            name="radioBasic" formControlName="mode">
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" [value]="0" (click)="acc.collapse(package.name)"> Auto
+            </label>
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" [value]="1" (click)="acc.expand(package.name)"> Manual
+            </label>
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" [value]="2" (click)="acc.collapse(package.name)"> None
+            </label>
+          </div>
+
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+
+        <app-package-switch [form]="form.controls[package.name]" [config]="package"></app-package-switch>
+      </ng-template>
+    </ngb-panel>
+  </ng-template>
+</ngb-accordion>

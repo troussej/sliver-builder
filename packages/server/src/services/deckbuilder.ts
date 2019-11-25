@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { CardInDeck, CardPackage, ColorStats, Deck, DeckStats, PackageSelectionState } from 'sliver-builder-common';
-import appConfig from '../config/config';
+import { config as appConfig } from '../config/config';
 import { logger } from '../util/logger';
 import { DeckForm } from 'sliver-builder-common/src/models/Deck';
 

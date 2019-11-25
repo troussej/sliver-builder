@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { CardsService } from 'src/app/services/cards.service';
 import { CardPackage, PackageSelectionState, Deck, DeckForm } from 'sliver-builder-common';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
