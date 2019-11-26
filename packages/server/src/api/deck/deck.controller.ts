@@ -19,7 +19,7 @@ export class DeckController implements Controller {
     this.initFormConfig().then(() => {
       this.initializeRoutes();
     },
-    );
+    ).catch(logger.error);
 
   }
 
@@ -58,7 +58,7 @@ export class DeckController implements Controller {
           [...chainResults, currentResult],
         ),
       );
-    },                  Promise.resolve([])).then(scryRes => {
+    }, Promise.resolve([])).then(scryRes => {
       // Do something with all results
       _.forEach(formConfig, (line: CardPackage, index: number) => {
         line.options = scryRes[index];
@@ -73,7 +73,7 @@ export class DeckController implements Controller {
 
     this.router
       .get('/config',
-           function (req: any, res: any) {
+        function (req: any, res: any) {
 
           const calls = _.map(this.rawConfig, (line: CardPackage) => this.scryfall.getCollection(line.name));
 
@@ -100,4 +100,4 @@ export class DeckController implements Controller {
 
   }
 }
-
+

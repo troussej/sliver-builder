@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Card } from 'scryfall-sdk-jtro';
-import { CardInDeck, CardPackage, ColorStats, Deck, DeckStats, PackageSelectionState } from 'sliver-builder-common';
-import { DeckForm } from 'sliver-builder-common/src/models/Deck';
+import { CardInDeck, CardPackage, ColorStats, Deck, DeckForm, DeckStats, PackageSelectionState } from 'sliver-builder-common';
+
 import { config as appConfig, PackageConfig } from '../config/config';
 import { logger } from '../util/logger';
 
@@ -40,31 +40,34 @@ export class DeckBuilder {
   }
 
   public computeStats(deck: Deck): void {
-    const stats = _.reduce(deck.cards, function (res: DeckStats, cardInDeck: CardInDeck) {
+    const stats = _.reduce(
+      deck.cards,
+      (res: DeckStats, cardInDeck: CardInDeck) => {
 
-      const quantity = cardInDeck.quantity;
+        const quantity = cardInDeck.quantity;
 
-      // mana costs
-      const cost = cardInDeck.card.mana_cost;
+        // mana costs
+        const cost = cardInDeck.card.mana_cost;
 
-      res.spells.W += this.countOccurence(cost, this.COUNT_W);
-      res.spells.U += this.countOccurence(cost, this.COUNT_U);
-      res.spells.B += this.countOccurence(cost, this.COUNT_B);
-      res.spells.R += this.countOccurence(cost, this.COUNT_R);
-      res.spells.G += this.countOccurence(cost, this.COUNT_G);
+        res.spells.W += this.countOccurence(cost, this.COUNT_W);
+        res.spells.U += this.countOccurence(cost, this.COUNT_U);
+        res.spells.B += this.countOccurence(cost, this.COUNT_B);
+        res.spells.R += this.countOccurence(cost, this.COUNT_R);
+        res.spells.G += this.countOccurence(cost, this.COUNT_G);
 
-      // mana sources
-      const oracleText = cardInDeck.card.oracle_text;
-      this.calcManaSources(oracleText, res.mana);
+        // mana sources
+        const oracleText = cardInDeck.card.oracle_text;
+        this.calcManaSources(oracleText, res.mana);
 
-      // mana curve
-      if (!this.isLand(cardInDeck.card)) {
-        this.calcManaCurve(res.curve, cardInDeck.card.cmc);
-      }
+        // mana curve
+        if (!this.isLand(cardInDeck.card)) {
+          this.calcManaCurve(res.curve, cardInDeck.card.cmc);
+        }
 
-      return res;
-    }.bind(this),
-                         new DeckStats());
+        return res;
+      },
+      new DeckStats(),
+    );
 
     deck.stats = stats;
   }
@@ -89,12 +92,12 @@ export class DeckBuilder {
     if (_.isNil(curve[cmc])) {
       curve[cmc] = 0;
     }
-    curve[cmc]++;
+    curve[cmc] = curve[cmc] + 1;
   }
 
   public calcManaSources(oracleText: string, res: ColorStats) {
-    const lines = oracleText.split('\n');
-    lines.forEach(line => {
+    const lines: string[] = oracleText.split('\n');
+    lines.forEach((line: string) => {
       let matches: string[] = this.matchOracleText(line);
 
       if (!_.isNil(matches) && matches.length >= 4) {
@@ -121,9 +124,9 @@ export class DeckBuilder {
   public addManualCards(deck: Deck, config: CardPackage[]) {
     logger.debug('addManualCards %j %j', deck, config);
     _.chain(config)
-      .filter(pkg => pkg.mode === PackageSelectionState.Manual)
+      .filter((pkg: CardPackage) => pkg.mode === PackageSelectionState.Manual)
       .tap(data => logger.debug('post filter %j', _.map(data, 'name')))
-      .each(pkg => {
+      .each((pkg: CardPackage) => {
         logger.debug('pkg : %j', pkg);
 
         const pckConfig: PackageConfig = _.find(appConfig.packages, ['name', pkg.name]);

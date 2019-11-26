@@ -25,7 +25,7 @@
     "space-before-function-paren": [
       true,
       {
-        "constructor": "always"
+        "constructor": "never"
       }
     ]
   },

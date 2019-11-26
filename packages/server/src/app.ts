@@ -16,7 +16,7 @@ import { MONGODB_URI } from './util/secrets';
 export class App {
   public app: express.Application;
 
-  constructor (controllers: Controller[]) {
+  constructor(controllers: Controller[]) {
     this.app = express();
 
     // this.connectToTheDatabase();

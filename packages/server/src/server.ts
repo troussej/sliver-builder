@@ -1,6 +1,7 @@
 
 import { ApiController } from './api/api.controller';
 import { App } from './app';
+import { MONGODB_URI } from './util/secrets';
 
 // import AuthenticationController from './authentication/authentication.controller';
 // import PostController from './post/post.controller';
@@ -13,9 +14,9 @@ import { App } from './app';
 const app = new App(
   [
     new ApiController(),
-        // new AuthenticationController(),
-        // new UserController(),
-        // new ReportController(),
+    // new AuthenticationController(),
+    // new UserController(),
+    // new ReportController(),
   ],
 );
 
