@@ -21,7 +21,13 @@
     "object-literal-sort-keys": false,
     "no-any": true,
     "no-unused-expression": true,
-    "typedef": true
+    "typedef": true,
+    "space-before-function-paren": [
+      true,
+      {
+        "constructor": "always"
+      }
+    ]
   },
   "rulesDirectory": []
 }

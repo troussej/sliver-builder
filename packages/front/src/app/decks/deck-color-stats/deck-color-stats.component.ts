@@ -25,7 +25,7 @@ export class DeckColorStatsComponent implements OnInit, OnChanges {
     {
       backgroundColor: [
         '#eeeeee', // W
-        '#4352bf', // U 
+        '#4352bf', // U
         '#111111', // B
         '#ce2424', // R
         '#259839', // G
@@ -34,7 +34,7 @@ export class DeckColorStatsComponent implements OnInit, OnChanges {
     {
       backgroundColor: [
         '#eeeeee', // W
-        '#4352bf', // U 
+        '#4352bf', // U
         '#111111', // B
         '#ce2424', // R
         '#259839', // G
