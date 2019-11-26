@@ -11,15 +11,12 @@ import Controller from '../controller.interface';
 export class DeckController implements Controller {
   public path = '/decks';
   public router = express.Router();
-  private scryfall: Scryfall = new Scryfall();
+
   private deckbuilder: DeckBuilder = new DeckBuilder();
 
-  constructor () {
+  constructor(private scryfall: Scryfall) {
     // pre fill the caches
-    this.initFormConfig().then(() => {
-      this.initializeRoutes();
-    },
-    ).catch(logger.error);
+    this.initializeRoutes();
 
   }
 

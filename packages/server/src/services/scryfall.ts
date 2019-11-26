@@ -1,50 +1,43 @@
+import cacheManager from 'cache-manager';
+// tslint:disable-next-line: no-var-requires
+const fsStore = require('cache-manager-fs');
 import _ from 'lodash';
-import NodeCache from 'node-cache';
 import * as  Scry from 'scryfall-sdk-jtro';
 import MagicQuerier from 'scryfall-sdk-jtro/out/util/MagicQuerier';
 import { config } from '../config/config';
 import { logger } from '../util/logger';
 
 export default class Scryfall {
-  private cache: NodeCache;
+  private cache: cacheManager.Cache;
 
   constructor() {
-    this.cache = new NodeCache();
     logger.debug('SCRYFALL_URI : %s', process.env.SCRYFALL_URI);
+    this.initCache().then(() => logger.debug('scryfall cache initialized'));
   }
 
   public searchByNickname(nickname: string): Promise<Scry.Card[]> {
 
     const key: string = `nickname:${nickname}`;
-    const res: Scry.Card[] = this.cache.get(key);
-    if (_.isNil(res)) {
+    // const res: Scry.Card[] = this.cache.get(key);
+
+    return this.cache.wrap(key, () => {
       logger.debug('calling scryfall for %s', key);
       logger.silly('SCRYFALL_URI : %s', process.env.SCRYFALL_URI);
       return Scry.Cards.search(`is:${nickname}`).waitForAll()
         .then(data => _.sortBy(data, 'name'))
-        .then((data) => {
-          logger.silly('scryfall result for %j : %j', nickname, data);
-          this.cache.set(key, data);
-          return data;
-        })
         .catch((err: Error) => {
           logger.error(err);
           return [];
         });
+    });
 
-    }
-    logger.silly('returning cached value for %s', key);
-
-    return Promise.resolve(res);
   }
 
   public getCollection(collectionName: string, cards: string[]): Promise<Scry.Card[]> {
 
     const key: string = `collection:${collectionName}`;
-    const res: Scry.Card[] = this.cache.get(key);
 
-    if (_.isNil(res)) {
-
+    return this.cache.wrap(key, () => {
       if (!_.isNil(cards)) {
         const ids: Scry.CardIdentifier[] = _.map(cards, (name: string) => Scry.CardIdentifier.byName(name));
 
@@ -54,8 +47,6 @@ export default class Scryfall {
           .then(data => _.sortBy(data, 'name'))
           .then((data) => {
             logger.silly('scryfall result for %j : %j - err: %s', ids, data, MagicQuerier.lastError);
-
-            this.cache.set(key, data);
             return data;
           })
           .catch((err: Error) => {
@@ -65,13 +56,26 @@ export default class Scryfall {
 
       }
       logger.warn('no collection configuration for %s, returning empty', key);
-
-      this.cache.set(key, []);
       return Promise.resolve([]);
+    });
+  }
 
-    }
-    logger.silly('returning cached value for %s', key);
+  private initCache(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
 
-    return Promise.resolve(res);
+      this.cache = cacheManager.caching({
+        store: fsStore,
+        ttl: 60 * 60,
+        options: {
+          ttl: 60 * 60 /* seconds */,
+          maxsize: 1000 * 1000 * 1000 /* max size in bytes on disk */,
+          path: '.cache',
+          preventfill: false,
+          fillcallback: () => {
+            resolve(true);
+          }
+        },
+      });
+    });
   }
 }
