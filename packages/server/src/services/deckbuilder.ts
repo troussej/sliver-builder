@@ -1,12 +1,9 @@
 import _ from 'lodash';
+import { Card } from 'scryfall-sdk-jtro';
 import { CardInDeck, CardPackage, ColorStats, Deck, DeckStats, PackageSelectionState } from 'sliver-builder-common';
+import { DeckForm } from 'sliver-builder-common/src/models/Deck';
 import { config as appConfig, PackageConfig } from '../config/config';
 import { logger } from '../util/logger';
-import { DeckForm } from 'sliver-builder-common/src/models/Deck';
-import { Card } from 'scryfall-sdk-jtro';
-
-
-
 
 export class DeckBuilder {
 
@@ -24,26 +21,31 @@ export class DeckBuilder {
   public build(form: DeckForm): Deck {
     logger.silly('build %j', form);
 
-    let deck: Deck = new Deck([]);
+    const deck: Deck = new Deck([]);
 
     this.addManualCards(deck, form.packages);
 
     this.computeStats(deck);
 
+    this.completeWithAutoCards(deck);
+
     this.sortDeck(deck);
     return deck;
   }
-  sortDeck(deck: Deck) {
-    deck.cards = _.sortBy(deck.cards, "priority");
+  public completeWithAutoCards(deck: Deck): void {
+    throw new Error('Method not implemented.');
+  }
+  public sortDeck(deck: Deck) {
+    deck.cards = _.sortBy(deck.cards, 'priority');
   }
 
-  computeStats(deck: Deck): void {
-    let stats = _.reduce(deck.cards, function (res: DeckStats, cardInDeck: CardInDeck) {
+  public computeStats(deck: Deck): void {
+    const stats = _.reduce(deck.cards, function (res: DeckStats, cardInDeck: CardInDeck) {
 
-      let quantity = cardInDeck.quantity;
+      const quantity = cardInDeck.quantity;
 
-      //mana costs
-      let cost = cardInDeck.card.mana_cost;
+      // mana costs
+      const cost = cardInDeck.card.mana_cost;
 
       res.spells.W += this.countOccurence(cost, this.COUNT_W);
       res.spells.U += this.countOccurence(cost, this.COUNT_U);
@@ -51,25 +53,24 @@ export class DeckBuilder {
       res.spells.R += this.countOccurence(cost, this.COUNT_R);
       res.spells.G += this.countOccurence(cost, this.COUNT_G);
 
-      //mana sources
-      let oracleText = cardInDeck.card.oracle_text;
+      // mana sources
+      const oracleText = cardInDeck.card.oracle_text;
       this.calcManaSources(oracleText, res.mana);
 
-      //mana curve
+      // mana curve
       if (!this.isLand(cardInDeck.card)) {
         this.calcManaCurve(res.curve, cardInDeck.card.cmc);
       }
 
-
       return res;
     }.bind(this),
-      new DeckStats());
+                         new DeckStats());
 
     deck.stats = stats;
   }
 
   public isLand(card: Card) {
-    return card.type_line.match(this.LAND)
+    return card.type_line.match(this.LAND);
   }
 
   public matchOracleText(text: string): string[] {
@@ -92,12 +93,12 @@ export class DeckBuilder {
   }
 
   public calcManaSources(oracleText: string, res: ColorStats) {
-    let lines = oracleText.split('\n')
+    const lines = oracleText.split('\n');
     lines.forEach(line => {
       let matches: string[] = this.matchOracleText(line);
 
       if (!_.isNil(matches) && matches.length >= 4) {
-        let rightHandSide = matches[3];
+        const rightHandSide = matches[3];
         matches = this.matchAddMana(rightHandSide);
 
         if (!_.isNil(matches) && matches.length > 0) {
@@ -112,23 +113,23 @@ export class DeckBuilder {
 
   }
 
-  countOccurence(val: string, regex: RegExp): number {
+  public countOccurence(val: string, regex: RegExp): number {
     return (val.match(regex) || []).length;
 
   }
 
-  addManualCards(deck: Deck, config: CardPackage[]) {
-    logger.debug("addManualCards %j %j", deck, config)
+  public addManualCards(deck: Deck, config: CardPackage[]) {
+    logger.debug('addManualCards %j %j', deck, config);
     _.chain(config)
       .filter(pkg => pkg.mode === PackageSelectionState.Manual)
-      .tap(data => logger.debug('post filter %j', _.map(data, "name")))
+      .tap(data => logger.debug('post filter %j', _.map(data, 'name')))
       .each(pkg => {
         logger.debug('pkg : %j', pkg);
 
-        let pckConfig: PackageConfig = _.find(appConfig.packages, ["name", pkg.name]);
+        const pckConfig: PackageConfig = _.find(appConfig.packages, ['name', pkg.name]);
 
-        let priority = pckConfig.priority;
-        let cid: CardInDeck[] = _.map(pkg.options, card => new CardInDeck(card, 1, priority));
+        const priority = pckConfig.priority;
+        const cid: CardInDeck[] = _.map(pkg.options, card => new CardInDeck(card, 1, priority));
 
         logger.debug('cid : %j', cid);
         deck.cards = _.concat(deck.cards, cid);

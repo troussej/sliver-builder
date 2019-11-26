@@ -14,7 +14,7 @@ import { ColorStats, DeckStats } from 'sliver-builder-common';
 export class DeckColorStatsComponent implements OnInit, OnChanges {
 
   @Input() stats: DeckStats;
-  @Input() titleKey: String;
+  @Input() titleKey: string;
 
   // Pie
   public chartOptions: ChartOptions = {

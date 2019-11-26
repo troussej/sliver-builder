@@ -1,10 +1,9 @@
-import { Card, Color } from "scryfall-sdk";
-
+import { Card, Color } from 'scryfall-sdk';
 
 export enum PackageSelectionState {
   Auto,
   Manual,
-  None
+  None,
 }
 
 export class CardPackage {
@@ -12,9 +11,9 @@ export class CardPackage {
   constructor (
     public name: string,
     public required: boolean,
-    public type: string, //radio,checkbox
+    public type: string, // radio,checkbox
     public options: Card[] = [],
-    public mode: PackageSelectionState = PackageSelectionState.Auto
+    public mode: PackageSelectionState = PackageSelectionState.Auto,
 
   ) { }
 
@@ -23,8 +22,8 @@ export class CardPackage {
 export class Deck {
   public stats: DeckStats;
   constructor (
-    public cards: CardInDeck[]
-  ) { };
+    public cards: CardInDeck[],
+  ) { }
 }
 
 export class CardInDeck {
@@ -32,9 +31,9 @@ export class CardInDeck {
   constructor (
     public card: Card,
     public quantity: number,
-    public priority: number
+    public priority: number,
 
-  ) { };
+  ) { }
 
 }
 
@@ -48,9 +47,9 @@ export class ColorStats {
 
 export class DeckStats {
 
-  spells: ColorStats = new ColorStats();
-  mana: ColorStats = new ColorStats();
-  curve: { [rank: number]: number } = {};
+  public spells: ColorStats = new ColorStats();
+  public mana: ColorStats = new ColorStats();
+  public curve: { [rank: number]: number } = {};
 }
 
 export class DeckOptions {
