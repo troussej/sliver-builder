@@ -1,6 +1,6 @@
 // {1}, {T}: Add {W}{U}.
 
-import { ColorStats } from '../../../common/src/models/Deck';
+import { ColorStats } from 'sliver-builder-common';
 import { DeckBuilder } from './deckbuilder';
 
 describe('CardsService', () => {
