@@ -1,11 +1,12 @@
 0 silly argv {
-0 silly argv   _: [ 'run' ],
+0 silly argv   _: [ 'add' ],
+0 silly argv   scope: 'sliver-builder-front',
+0 silly argv   globs: [],
 0 silly argv   lernaVersion: '3.18.4',
-0 silly argv   '$0': 'node_modules\\lerna\\cli.js',
-0 silly argv   script: 'dev'
+0 silly argv   '$0': '..\\..\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js',
+0 silly argv   pkg: 'boostwatch'
 0 silly argv }
 1 notice cli v3.18.4
-2 verbose rootPath E:\workspace\sliver-builder
-3 error JSONError: Unexpected token } in JSON at position 287 while parsing near '...ut-path dist",    },    "private": tr...' in packages\front\package.json
-3 error     at module.exports (E:\workspace\sliver-builder\node_modules\parse-json\index.js:26:19)
-3 error     at parse (E:\workspace\sliver-builder\node_modules\load-json-file\index.js:15:9)
+2 verbose rootPath C:\Users\troussetj\workspace\sliver-builder
+3 error Error: 404 Not Found - GET https://registry.npmjs.org/boostwatch - Not found
+3 error     at C:\Users\troussetj\workspace\sliver-builder\node_modules\@evocateur\npm-registry-fetch\check-response.js:104:15

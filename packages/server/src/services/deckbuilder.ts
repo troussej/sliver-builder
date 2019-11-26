@@ -33,7 +33,7 @@ export class DeckBuilder {
     return deck;
   }
   public completeWithAutoCards(deck: Deck): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
   public sortDeck(deck: Deck) {
     deck.cards = _.sortBy(deck.cards, 'priority');
